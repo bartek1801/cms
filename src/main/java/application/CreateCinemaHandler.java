@@ -1,6 +1,8 @@
 package application;
 
+import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
+
 public class CreateCinemaHandler {
 
-    public void handle() {}
+    void handle(CreateCinemaCommand cmd) {}
 }
