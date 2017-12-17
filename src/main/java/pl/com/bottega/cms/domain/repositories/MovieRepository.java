@@ -8,4 +8,6 @@ import pl.com.bottega.cms.domain.Movie;
 public interface MovieRepository {
 
     void save(Movie movie);
+
+    Movie get(Long movieId);
 }

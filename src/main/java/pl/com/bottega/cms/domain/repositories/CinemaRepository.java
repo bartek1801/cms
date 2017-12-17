@@ -16,4 +16,6 @@ public interface CinemaRepository {
 
     Optional<Cinema> get(String name, String city);
 
+
+    Cinema get(Long cinemaId);
 }

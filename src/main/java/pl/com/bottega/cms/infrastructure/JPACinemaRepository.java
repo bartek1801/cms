@@ -43,4 +43,13 @@ public class JPACinemaRepository implements CinemaRepository {
         }
     }
 
+    @Override
+    public Cinema get(Long cinemaId) {
+        Cinema cinema = entityManager.find(Cinema.class, cinemaId);
+        if (cinema == null)
+            throw new NoSuchEntityException();
+        return cinema;
+    }
+
+
 }
