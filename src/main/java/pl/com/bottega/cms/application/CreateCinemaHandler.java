@@ -1,8 +1,18 @@
 package pl.com.bottega.cms.application;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
 
-public class CreateCinemaHandler {
+@Component
+public class CreateCinemaHandler implements Handler<CreateCinemaCommand>{
 
-    void handle(CreateCinemaCommand cmd) {}
+    @Transactional
+    public void handle(CreateCinemaCommand cmd) {}
+
+    @Override
+    public Class<? extends Command> getSupportedCommandClass() {
+        return CreateCinemaCommand.class;
+    }
 }

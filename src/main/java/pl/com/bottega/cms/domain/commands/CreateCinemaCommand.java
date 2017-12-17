@@ -1,7 +1,6 @@
 package pl.com.bottega.cms.domain.commands;
 
-public class CreateCinemaCommand {
-
+public class CreateCinemaCommand implements Command{
     private String name, city;
 
     public String getName() {

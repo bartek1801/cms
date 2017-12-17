@@ -31,5 +31,31 @@ public class Movie {
 
     Movie() {}
 
-    
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Set<String> getActors() {
+        return actors;
+    }
+
+    public Set<String> getGenres() {
+        return genres;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
 }
