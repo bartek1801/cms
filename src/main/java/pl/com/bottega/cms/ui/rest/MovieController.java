@@ -14,7 +14,7 @@ private CommandGateway gateway;
         this.gateway = gateway;
     }
 
-    @PutMapping()
+    @PutMapping
     public void addMovie(@RequestBody CreateMovieCommand cmd) {
         gateway.execute(cmd);
     }
