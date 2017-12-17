@@ -1,4 +1,4 @@
-package application;
+package pl.com.bottega.cms.application;
 
 import java.util.List;
 
