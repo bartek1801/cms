@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.UI.rest;
+package pl.com.bottega.cms.ui.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

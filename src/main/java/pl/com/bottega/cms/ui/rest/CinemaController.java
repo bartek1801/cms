@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.ui;
+package pl.com.bottega.cms.ui.rest;
 
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
