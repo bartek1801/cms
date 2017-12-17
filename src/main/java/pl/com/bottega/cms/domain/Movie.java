@@ -1,21 +1,71 @@
 package pl.com.bottega.cms.domain;
 
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by user on 17.12.2017.
  */
+@Entity
+@Table(name = "movies")
 public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String title;
 
     private String description;
 
-    private Collection<Actor> actors;
+    @ElementCollection
+    private Set<String> actors;
 
-    private Collection<Genre> genres;
+    @ElementCollection
+    private Set<String> genres;
 
-    private String minAge;
+    @Column(name = "min_age")
+    private Integer minAge;
 
     private Integer length;
+
+    public Movie(String title, String description, Set<String> actors, Set<String> genres,
+                 Integer minAge, Integer length) {
+        this.title = title;
+        this.description = description;
+        this.actors = actors;
+        this.genres = genres;
+        this.minAge = minAge;
+        this.length = length;
+    }
+
+    Movie() {}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Set<String> getActors() {
+        return actors;
+    }
+
+    public Set<String> getGenres() {
+        return genres;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
 }
