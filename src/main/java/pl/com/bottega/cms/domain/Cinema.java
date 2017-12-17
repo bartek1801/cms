@@ -1,16 +1,24 @@
 package pl.com.bottega.cms.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "cinemas")
 public class Cinema {
-/**
-        * Created by user on 16.12.2017.
-            */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private String city;
 
+    public Cinema() {
+    }
+
+    public Cinema(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
 }
