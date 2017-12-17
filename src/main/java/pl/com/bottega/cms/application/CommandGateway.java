@@ -2,6 +2,7 @@ package pl.com.bottega.cms.application;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import pl.com.bottega.cms.domain.commands.Command;
 
 import java.util.Map;
 import java.util.Optional;
