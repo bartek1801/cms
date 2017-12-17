@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,10 +20,10 @@ public class Movie {
     private String description;
 
     @ElementCollection
-    private Set<String> actors;
+    private Set<String> actors = new HashSet<>();
 
     @ElementCollection
-    private Set<String> genres;
+    private Set<String> genres = new HashSet<>();
 
     @Column(name = "min_age")
     private Integer minAge;
