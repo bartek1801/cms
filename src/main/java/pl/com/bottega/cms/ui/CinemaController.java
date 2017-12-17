@@ -1,4 +1,4 @@
-package pl.com.bottega.cms.UI;
+package pl.com.bottega.cms.ui;
 
 public class CinemaController {
 
