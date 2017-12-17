@@ -1,10 +1,12 @@
 package pl.com.bottega.cms.application;
 
+import pl.com.bottega.cms.domain.Cinema;
+
 public class CinemaDto {
 
-    Long id;
-    String name;
-    String city;
+    private Long id;
+    private String name;
+    private String city;
 
     public Long getId() {
         return id;
@@ -27,6 +29,13 @@ public class CinemaDto {
     }
 
     public void setCity(String city) {
+        this.city = city;
+    }
+
+
+    public CinemaDto(Long id, String name, String city) {
+        this.id = id;
+        this.name = name;
         this.city = city;
     }
 }

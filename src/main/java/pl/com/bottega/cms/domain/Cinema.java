@@ -21,4 +21,16 @@ public class Cinema {
         this.name = name;
         this.city = city;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
 }

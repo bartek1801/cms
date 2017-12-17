@@ -1,6 +1,8 @@
 package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import pl.com.bottega.cms.application.CinemaDto;
 import pl.com.bottega.cms.domain.Cinema;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 
@@ -40,6 +42,5 @@ public class JPACinemaRepository implements CinemaRepository {
             return Optional.empty();
         }
     }
-
 
 }

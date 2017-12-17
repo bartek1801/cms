@@ -1,24 +1,34 @@
 package pl.com.bottega.cms.ui.rest;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.com.bottega.cms.application.CinemaDto;
+import pl.com.bottega.cms.application.CinemaFinder;
 import pl.com.bottega.cms.application.CommandGateway;
 import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/cinemas")
 public class CinemaController {
 
     private CommandGateway commandGateway;
+    private CinemaFinder cinemaFinder;
 
 
-    public CinemaController(CommandGateway commandGateway) {
+    public CinemaController(CommandGateway commandGateway, CinemaFinder cinemaFinder) {
         this.commandGateway = commandGateway;
+        this.cinemaFinder = cinemaFinder;
     }
 
-    @PutMapping("/cinema")
+    @PutMapping
     public void create(@RequestBody CreateCinemaCommand command) {
         commandGateway.execute(command);
+    }
+
+    @GetMapping
+    public List<CinemaDto> getCinemasList() {
+        return cinemaFinder.getAll();
     }
 
 }
