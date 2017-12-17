@@ -1,11 +1,12 @@
 package pl.com.bottega.cms.application;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.domain.Movie;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
-
+@Component
 public class CreateMovieHandler implements Handler<CreateMovieCommand> {
 
      private MovieRepository repository;

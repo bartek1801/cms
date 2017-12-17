@@ -17,6 +17,6 @@ public class JPAMovieRepository implements MovieRepository {
 
     @Override
     public void save(Movie movie) {
-
+        entityManager.persist(movie);
     }
 }
