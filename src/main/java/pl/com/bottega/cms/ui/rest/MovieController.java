@@ -8,7 +8,7 @@ import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 @RequestMapping("/movies")
 public class MovieController {
 
-private CommandGateway gateway;
+    private CommandGateway gateway;
 
     public MovieController(CommandGateway gateway) {
         this.gateway = gateway;
