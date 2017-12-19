@@ -12,7 +12,18 @@ public class CreateShowsCommand implements Command {
     ShowsCalendar calendar;
 
 
-    //TODO walidacja komendy mozę być moviID i dates lub movieID i calendar
+    public void validate(ValidationErrors errors){
+        validatePresence(errors, "movieId", movieId);
+        if (dates == null && calendar == null) {
+            errors.add("dates & calendar", "enter dates or calendar");
+            throw new CommandInvalidException(errors);
+        }
+        if (dates != null && calendar != null){
+            errors.add("dates & calendar", "enter dates OR calendar, not both");
+            throw new CommandInvalidException(errors);
+        }
+
+    }
 
 
     public Long getMovieId() {

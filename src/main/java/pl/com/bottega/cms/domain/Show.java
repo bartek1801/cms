@@ -1,10 +1,7 @@
 package pl.com.bottega.cms.domain;
 
-import pl.com.bottega.cms.domain.commands.ShowsCalendar;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Table(name = "shows")
@@ -32,8 +29,5 @@ public class Show {
         this.date = date;
     }
 
-    public Show(Long cinemaId, Long movieId, LocalDateTime dateTime) {
-
-    }
 
 }

@@ -1,9 +1,5 @@
 package pl.com.bottega.cms.domain.commands;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
@@ -11,11 +7,25 @@ import java.util.Set;
 
 public class ShowsCalendar {
 
-    private LocalDateTime fromdDate, untilDate;
+    private LocalDateTime fromDate, untilDate;
 
     private Set<String> weekDays;
 
     private Set<LocalTime> hours;
 
+    public LocalDateTime getFromDate() {
+        return fromDate;
+    }
 
+    public LocalDateTime getUntilDate() {
+        return untilDate;
+    }
+
+    public Set<String> getWeekDays() {
+        return weekDays;
+    }
+
+    public Set<LocalTime> getHours() {
+        return hours;
+    }
 }
