@@ -13,6 +13,22 @@ public class ShowsCalendar {
 
     private Set<LocalTime> hours;
 
+    public void setFromDate(LocalDateTime fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public void setUntilDate(LocalDateTime untilDate) {
+        this.untilDate = untilDate;
+    }
+
+    public void setWeekDays(Set<String> weekDays) {
+        this.weekDays = weekDays;
+    }
+
+    public void setHours(Set<LocalTime> hours) {
+        this.hours = hours;
+    }
+
     public LocalDateTime getFromDate() {
         return fromDate;
     }

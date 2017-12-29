@@ -1,9 +1,11 @@
 package pl.com.bottega.cms.domain;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.domain.commands.CreateShowsCommand;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
+import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,12 +20,16 @@ public class ShowFactory {
 
     private MovieRepository movieRepository;
 
-    public ShowFactory(CinemaRepository cinemaRepository, MovieRepository movieRepository) {
+    private ShowRepository showRepository;
+
+    public ShowFactory(CinemaRepository cinemaRepository, MovieRepository movieRepository, ShowRepository showRepository) {
         this.cinemaRepository = cinemaRepository;
         this.movieRepository = movieRepository;
+        this.showRepository = showRepository;
     }
 
 
+    //@Transactional
     public Collection<Show> createShows(CreateShowsCommand command) {
         Cinema cinema = cinemaRepository.get(command.getCinemaId());
         Movie movie = movieRepository.get(command.getMovieId());
@@ -45,25 +51,32 @@ public class ShowFactory {
             for (String day : weekDays) {
                 if (isTheSameDay(date, day)) {
                     for (LocalTime hour : hours) {
-                        Show show = new Show(cinema, movie, LocalDateTime.of(date.toLocalDate(), hour));
-                        //TODO sprawdzenie czy tego dnia o tej porze jakieś show istnieje
-                        showsList.add(show);
+                        if (showExist(LocalDateTime.of(date.toLocalDate(), hour), cinema, movie)) {
+                            Show show = new Show(cinema, movie, LocalDateTime.of(date.toLocalDate(), hour));
+                            showsList.add(show);
+                        }
                     }
                 }
             }
         }
     }
 
+    private boolean showExist(LocalDateTime dateTime, Cinema cinema, Movie movie) {
+        return showRepository.find(dateTime, cinema, movie).isEmpty();
+    }
+
+
     private void createShowWithoutCalendar(CreateShowsCommand command, Cinema cinema, Movie movie, Collection<Show> showsList) {
         command.getDates().stream().forEach(dateTime -> {
             Show show = new Show(cinema, movie, dateTime);
-            //TODO sprawdzenie czy tego dnia o tej porze jakieś show istnieje
-            showsList.add(show);
+            if (showExist(dateTime, cinema, movie))
+                showsList.add(show);
         });
     }
 
     private boolean isTheSameDay(LocalDateTime date, String day) {
         return date.getDayOfWeek().name().equals(day.toUpperCase());
     }
+
 
 }

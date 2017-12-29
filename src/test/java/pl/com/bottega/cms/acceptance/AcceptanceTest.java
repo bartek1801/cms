@@ -20,6 +20,8 @@ public class AcceptanceTest {
     public void cleanUp() {
         tt.execute((c) -> {
             em.createNativeQuery("DELETE FROM movies").executeUpdate();
+            em.createNativeQuery("DELETE FROM cinemas").executeUpdate();
+            em.createNativeQuery("DELETE FROM shows").executeUpdate();
             return null;
         });
     }

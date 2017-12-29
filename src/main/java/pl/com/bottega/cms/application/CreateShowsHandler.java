@@ -12,7 +12,6 @@ import pl.com.bottega.cms.domain.repositories.ShowRepository;
 import java.util.function.Consumer;
 
 @Component
-@Transactional
 public class CreateShowsHandler implements Handler<CreateShowsCommand> {
 
     private ShowRepository showRepository;
@@ -26,7 +25,9 @@ public class CreateShowsHandler implements Handler<CreateShowsCommand> {
 
 
     @Override
+    @Transactional
     public void handle(CreateShowsCommand command) {
+
         showFactory.createShows(command).stream().forEach(show -> showRepository.save(show));
     }
 
