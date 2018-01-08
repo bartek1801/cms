@@ -1,7 +1,6 @@
 package pl.com.bottega.cms.domain;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.domain.commands.CreateShowsCommand;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
@@ -63,7 +62,7 @@ public class ShowFactory {
 
     private boolean showExist(LocalDateTime dateTime, Cinema cinema, Movie movie) {
         return showRepository.find(dateTime, cinema, movie).isEmpty();
-    }
+    }//TODO nie trzeba sprawdzać czy show istnieje -> usuń metodę i jej użycia!!!!
 
 
     private void createShowWithoutCalendar(CreateShowsCommand command, Cinema cinema, Movie movie, Collection<Show> showsList) {

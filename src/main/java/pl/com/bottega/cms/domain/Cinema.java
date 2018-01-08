@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "cinemas")
@@ -13,6 +14,9 @@ public class Cinema {
     private String name;
 
     private String city;
+
+    @OneToMany(mappedBy = "cinema")
+    private Collection<Show> shows;
 
     public Cinema() {
     }
