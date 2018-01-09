@@ -21,10 +21,10 @@ public class Movie {
 
     private String description;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> actors = new HashSet<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> genres = new HashSet<>();
 
     @Column(name = "min_age")

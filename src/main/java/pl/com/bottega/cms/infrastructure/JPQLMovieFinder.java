@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.application.MovieFinder;
 import pl.com.bottega.cms.domain.Cinema;
+import pl.com.bottega.cms.domain.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -35,5 +36,13 @@ public class JPQLMovieFinder implements MovieFinder {
         query.setParameter("fromTime", date.atStartOfDay());
         query.setParameter("toTime", date.atTime(23, 59));
         return query.getResultList();
+    }
+
+    @Override
+    public MovieDto get(Long movieId) {
+        Movie movie = entityManager.find(Movie.class, movieId);
+        if (movie == null)
+            throw new NoSuchEntityException();
+        return new MovieDto(movie);
     }
 }
