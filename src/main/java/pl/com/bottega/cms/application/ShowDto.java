@@ -6,11 +6,25 @@ import java.time.LocalTime;
 
 public class ShowDto {
 
-    Long id;
+    private Long id;
 
-    LocalTime time;
+    private LocalTime time;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 
     public ShowDto(Show show) {
         this.id = show.getId();

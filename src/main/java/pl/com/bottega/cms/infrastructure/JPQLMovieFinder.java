@@ -10,6 +10,7 @@ import pl.com.bottega.cms.domain.Movie;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Component
@@ -39,7 +40,7 @@ public class JPQLMovieFinder implements MovieFinder {
                 "GROUP BY m.id ");
         query.setParameter("cinema", cinema);
         query.setParameter("fromTime", date.atStartOfDay());
-        query.setParameter("toTime", date.atTime(23, 59));
+        query.setParameter("toTime", date.atTime(LocalTime.MAX) );
         return query.getResultList();
     }
 

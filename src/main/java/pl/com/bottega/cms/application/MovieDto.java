@@ -24,13 +24,13 @@ public class MovieDto {
 
     private List<ShowDto> shows ;
 
-//    public List<ShowDto> getShows() {
-//        return shows;
-//    }
-//
-//    public void setShows(List<ShowDto> shows) {
-//        this.shows = shows;
-//    }
+    public List<ShowDto> getShows() {
+        return shows;
+    }
+
+    public void setShows(List<ShowDto> shows) {
+        this.shows = shows;
+    }
 
     public Long getId() {
         return id;
@@ -99,16 +99,5 @@ public class MovieDto {
         this.shows = movie.getShows().stream().map(ShowDto::new).collect(Collectors.toList());
     }
 
-
-//    public MovieDto(String title, String description, String actor,
-//                     String genre, Integer minAge, Integer length, Show show) {
-//        this.title = title;
-//        this.description = description;
-//        actors.add(actor);
-//        genres.add(genre);
-//        this.minAge = minAge;
-//        this.length = length;
-//        shows.add(new ShowDto(show));
-//    }
 
 }
