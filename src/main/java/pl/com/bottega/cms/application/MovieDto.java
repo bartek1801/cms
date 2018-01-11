@@ -1,7 +1,10 @@
 package pl.com.bottega.cms.application;
 
 import pl.com.bottega.cms.domain.Movie;
+import pl.com.bottega.cms.domain.Show;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,7 +25,7 @@ public class MovieDto {
 
     private Integer length;
 
-    private List<ShowDto> shows ;
+    private List<ShowDto> shows = new LinkedList<>();
 
     public List<ShowDto> getShows() {
         return shows;
@@ -96,8 +99,11 @@ public class MovieDto {
         this.genres = movie.getGenres();
         this.minAge = movie.getMinAge();
         this.length = movie.getLength();
-        this.shows = movie.getShows().stream().map(ShowDto::new).collect(Collectors.toList());
+        //this.shows = movie.getShows().stream().map(ShowDto::new).collect(Collectors.toList());
     }
 
 
+    public void addShows(List<ShowDto> showsFromDay) {
+        this.shows.addAll(showsFromDay);
+    }
 }
