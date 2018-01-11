@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.application.MovieFinder;
 import pl.com.bottega.cms.domain.Cinema;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
+@Transactional
 public class JPQLMovieFinder implements MovieFinder {
 
     private EntityManager entityManager;
@@ -26,12 +28,15 @@ public class JPQLMovieFinder implements MovieFinder {
         //TODO poprawić JPQL-a !!!!!!!!!!!!
         Cinema cinema = entityManager.find(Cinema.class, cinemaId);
         Query query = entityManager.createQuery("SELECT " +
-                "NEW pl.com.bottega.cms.application.MovieDto" +
-                "( m.title, m.description, m.actors, m.genres, m.minAge, m.length, m.shows) " +
+                "NEW  pl.com.bottega.cms.application.MovieDto" +
+                "( m ) " +
                 "FROM Movie m " +
-                "JOIN FETCH m.shows " +
+                //"LEFT JOIN FETCH m.shows  " +
                 "JOIN m.shows s " +
-                "WHERE s.cinema = :cinema AND s.date BETWEEN :fromTime AND :toTime ");
+                "JOIN m.actors a " +
+                "JOIN m.genres g " +
+                "WHERE s.cinema = :cinema AND s.date BETWEEN :fromTime AND :toTime " +
+                "GROUP BY m.id ");
         query.setParameter("cinema", cinema);
         query.setParameter("fromTime", date.atStartOfDay());
         query.setParameter("toTime", date.atTime(23, 59));

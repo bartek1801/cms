@@ -1,10 +1,7 @@
 package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by user on 17.12.2017.
@@ -33,7 +30,7 @@ public class Movie {
     private Integer length;
 
     @OneToMany(mappedBy = "movie")
-    private Collection<Show> shows;
+    private Collection<Show> shows = new LinkedList<>();
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -73,5 +70,9 @@ public class Movie {
 
     public Integer getLength() {
         return length;
+    }
+
+    public Collection<Show> getShows() {
+        return shows;
     }
 }

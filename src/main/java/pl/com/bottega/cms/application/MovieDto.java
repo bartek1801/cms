@@ -1,11 +1,7 @@
 package pl.com.bottega.cms.application;
 
 import pl.com.bottega.cms.domain.Movie;
-import pl.com.bottega.cms.domain.Show;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,11 +22,15 @@ public class MovieDto {
 
     private Integer length;
 
-    private Long showId;
+    private List<ShowDto> shows ;
 
-    private LocalTime showTime;
-
-    private Collection<ShowDto> shows;
+//    public List<ShowDto> getShows() {
+//        return shows;
+//    }
+//
+//    public void setShows(List<ShowDto> shows) {
+//        this.shows = shows;
+//    }
 
     public Long getId() {
         return id;
@@ -96,18 +96,19 @@ public class MovieDto {
         this.genres = movie.getGenres();
         this.minAge = movie.getMinAge();
         this.length = movie.getLength();
-        //this.shows = movie.getShows().stream().map(ShowDto::new).collect(Collectors.toList());
+        this.shows = movie.getShows().stream().map(ShowDto::new).collect(Collectors.toList());
     }
 
-    public MovieDto( String title, String description, Set<String> actors,
-                    Set<String> genres, Integer minAge, Integer length, Collection<Show> shows) {
-        this.title = title;
-        this.description = description;
-        this.actors = actors;
-        this.genres = genres;
-        this.minAge = minAge;
-        this.length = length;
-        this.shows = shows.stream().map(ShowDto::new).collect(Collectors.toList());
-    }
+
+//    public MovieDto(String title, String description, String actor,
+//                     String genre, Integer minAge, Integer length, Show show) {
+//        this.title = title;
+//        this.description = description;
+//        actors.add(actor);
+//        genres.add(genre);
+//        this.minAge = minAge;
+//        this.length = length;
+//        shows.add(new ShowDto(show));
+//    }
 
 }

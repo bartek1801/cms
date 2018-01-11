@@ -10,7 +10,7 @@ public class ShowDto {
 
     LocalTime time;
 
-    String movie;
+
 
     public ShowDto(Show show) {
         this.id = show.getId();
