@@ -6,12 +6,14 @@ import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.domain.commands.CreateShowsCommand;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
 @RequestMapping("/cinemas")
 public class CinemaController {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/d");
     private CommandGateway commandGateway;
     private CinemaFinder cinemaFinder;
     private MovieFinder movieFinder;
@@ -42,7 +44,7 @@ public class CinemaController {
 
     @GetMapping("/{cinemaId}/movies")
     public List<MovieDto> getShows(@PathVariable("cinemaId") Long cinemaId, @RequestParam String date){
-        return movieFinder.getFromDay(cinemaId, LocalDate.parse(date));
+        return movieFinder.getFromDay(cinemaId, LocalDate.parse(date, FORMATTER));
     }
 
 }
