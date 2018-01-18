@@ -31,5 +31,21 @@ public class ShowDto {
         this.time = show.getDate().toLocalTime();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        ShowDto showDto = (ShowDto) o;
+
+        if (!id.equals(showDto.id)) return false;
+        return time.equals(showDto.time);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + time.hashCode();
+        return result;
+    }
 }
