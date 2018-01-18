@@ -35,7 +35,7 @@ public class JPQLMovieFinder implements MovieFinder {
                 "JOIN FETCH m.actors " +
                 "JOIN FETCH m.genres " +
                 "WHERE s.cinema = :cinema AND s.date BETWEEN :fromTime AND :toTime " +
-                "ORDER BY m.title ASC, s.date ASC");
+                "ORDER BY m.title ASC ");
         query.setParameter("cinema", cinema);
         query.setParameter("fromTime", date.atTime(LocalTime.MIDNIGHT));
         query.setParameter("toTime", date.atTime(LocalTime.MAX));
