@@ -11,11 +11,12 @@ import pl.com.bottega.cms.application.CinemaFinder;
 import pl.com.bottega.cms.application.CreateCinemaHandler;
 import pl.com.bottega.cms.domain.commands.CommandInvalidException;
 import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
-/**
- * Created by user on 09.01.2018.
- */
+import java.util.List;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class CreateCinemaTest extends AcceptanceTest {
@@ -29,14 +30,14 @@ public class CreateCinemaTest extends AcceptanceTest {
     private CreateCinemaCommand createCinemaCommand;
 
     @Before
-    public void createCinema(){
+    public void createCinema() {
         createCinemaCommand = new CreateCinemaCommand();
         createCinemaCommand.setCity("Lublin");
         createCinemaCommand.setName("Plaza");
     }
 
     @Test
-    public void shouldCreateCinema(){
+    public void shouldCreateCinema() {
         //when
         createCinemaHandler.handle(createCinemaCommand);
 
@@ -47,13 +48,12 @@ public class CreateCinemaTest extends AcceptanceTest {
     }
 
     @Test(expected = CommandInvalidException.class)
-    public void shouldNotAllowToPersistTheSameCinemaTwice(){
+    public void shouldNotAllowToPersistTheSameCinemaTwice() {
         //given
         createCinemaHandler.handle(createCinemaCommand);
 
         //when
         createCinemaHandler.handle(createCinemaCommand);
     }
-
 
 }

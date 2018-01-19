@@ -3,9 +3,7 @@ package pl.com.bottega.cms.domain;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Created by user on 17.12.2017.
- */
+
 @Entity
 @Table(name = "movies")
 public class Movie {

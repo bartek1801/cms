@@ -1,5 +1,5 @@
 package pl.com.bottega.cms.acceptance;
-import org.junit.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,15 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.com.bottega.cms.application.CreateMovieHandler;
 import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.application.MovieFinder;
-import pl.com.bottega.cms.domain.Movie;
 import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static pl.com.bottega.cms.domain.Movie_.actors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,7 +1,5 @@
 package pl.com.bottega.cms.application;
 
-import pl.com.bottega.cms.domain.Cinema;
-
 public class CinemaDto {
 
     private Long id;
