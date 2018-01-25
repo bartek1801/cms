@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.commands.CreateShowsCommand;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
-import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,16 +18,14 @@ public class ShowFactory {
 
     private MovieRepository movieRepository;
 
-    private ShowRepository showRepository;
 
-    public ShowFactory(CinemaRepository cinemaRepository, MovieRepository movieRepository, ShowRepository showRepository) {
+    public ShowFactory(CinemaRepository cinemaRepository, MovieRepository movieRepository) {
         this.cinemaRepository = cinemaRepository;
         this.movieRepository = movieRepository;
-        this.showRepository = showRepository;
     }
 
 
-    //@Transactional
+
     public Collection<Show> createShows(CreateShowsCommand command) {
         Cinema cinema = cinemaRepository.get(command.getCinemaId());
         Movie movie = movieRepository.get(command.getMovieId());
@@ -50,25 +47,18 @@ public class ShowFactory {
             for (String day : weekDays) {
                 if (isTheSameDay(date, day)) {
                     for (LocalTime hour : hours) {
-                        if (showExist(LocalDateTime.of(date.toLocalDate(), hour), cinema, movie)) {
                             Show show = new Show(cinema, movie, LocalDateTime.of(date.toLocalDate(), hour));
                             showsList.add(show);
-                        }
                     }
                 }
             }
         }
     }
 
-    private boolean showExist(LocalDateTime dateTime, Cinema cinema, Movie movie) {
-        return showRepository.find(dateTime, cinema, movie).isEmpty();
-    }//TODO nie trzeba sprawdzać czy show istnieje -> usuń metodę i jej użycia!!!!
-
 
     private void createShowWithoutCalendar(CreateShowsCommand command, Cinema cinema, Movie movie, Collection<Show> showsList) {
         command.getDates().stream().forEach(dateTime -> {
             Show show = new Show(cinema, movie, dateTime);
-            if (showExist(dateTime, cinema, movie))
                 showsList.add(show);
         });
     }
