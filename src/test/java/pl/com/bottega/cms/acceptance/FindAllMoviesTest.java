@@ -55,7 +55,7 @@ public class FindAllMoviesTest extends AcceptanceTest {
         //then
         assertThat(movies.isEmpty());
     }
-
+//TODO 
 //    @Test
 //    @Transactional
 //    public void shouldReturnSomeMoviesOnAGivenDay() {
@@ -84,7 +84,7 @@ public class FindAllMoviesTest extends AcceptanceTest {
 //        assertThat(movies.get(0).getLength()).isEqualTo(Integer.valueOf(120));
 //    }
 
-
+//TODO
 //    @Test
 //    @Transactional
 //    public void shouldReturnAllMoviesOnAGivenDay() {
