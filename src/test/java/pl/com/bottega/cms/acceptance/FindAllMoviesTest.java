@@ -6,13 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.com.bottega.cms.application.CinemaDto;
-import pl.com.bottega.cms.application.CinemaFinder;
 import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.application.MovieFinder;
-import pl.com.bottega.cms.domain.Cinema;
 import pl.com.bottega.cms.domain.Movie;
-import pl.com.bottega.cms.domain.commands.CreateCinemaCommand;
 import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 
 import javax.persistence.EntityManager;
