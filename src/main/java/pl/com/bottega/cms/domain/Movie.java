@@ -29,7 +29,8 @@ public class Movie {
 
     private Integer length;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany //(mappedBy = "movie")
+    @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
@@ -42,7 +43,7 @@ public class Movie {
         this.length = length;
     }
 
-    Movie() {}
+    public Movie() {}
 
     public Long getId() {
         return id;
