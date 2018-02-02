@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 @Component
 public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
 
+    public static final String FIELD_CAN_T_BE_EMPTY_ERROR = "Field can't be empty";
     private CinemaRepository cinemaRepository;
 
     public CreateCinemaHandler(CinemaRepository cinemaRepository) {
@@ -39,8 +40,8 @@ public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
     private void validateCinemaParameters(CreateCinemaCommand command) {
         if(command.getCity().isEmpty() || command.getName().isEmpty()) {
             ValidationErrors errors = new ValidationErrors();
-            errors.add("name", "Field can't be empty");
-            errors.add("city", "Field can't be empty");
+            errors.add("name", FIELD_CAN_T_BE_EMPTY_ERROR);
+            errors.add("city", FIELD_CAN_T_BE_EMPTY_ERROR);
             throw new CommandInvalidException(errors);
         }
     }
