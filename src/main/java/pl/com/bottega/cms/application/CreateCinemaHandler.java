@@ -24,6 +24,7 @@ public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
     @Transactional
     public void handle(CreateCinemaCommand command) {
         validateCinemaPresence(command);
+        validateCinemaParameters(command);
         cinemaRepository.save(new Cinema(command.getName(), command.getCity()));
     }
 
@@ -31,6 +32,15 @@ public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
         if (cinemaRepository.isCinemaExist(command.getName(), command.getCity())){
             ValidationErrors errors = new ValidationErrors();
             errors.add("cinema", "Cinema already exist");
+            throw new CommandInvalidException(errors);
+        }
+    }
+
+    private void validateCinemaParameters(CreateCinemaCommand command) {
+        if(command.getCity().isEmpty() || command.getName().isEmpty()) {
+            ValidationErrors errors = new ValidationErrors();
+            errors.add("name", "Field can't be empty");
+            errors.add("city", "Field can't be empty");
             throw new CommandInvalidException(errors);
         }
     }

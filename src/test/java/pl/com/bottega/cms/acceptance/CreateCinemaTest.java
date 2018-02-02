@@ -56,4 +56,30 @@ public class CreateCinemaTest extends AcceptanceTest {
         createCinemaHandler.handle(createCinemaCommand);
     }
 
+    @Test
+    public void shouldSaveCinemasAtList() {
+        CreateCinemaCommand c1 = new CreateCinemaCommand();
+        c1.setName("Olimp");
+        c1.setCity("Lublin");
+        CreateCinemaCommand c2 = new CreateCinemaCommand();
+        c2.setName("Bajka");
+        c2.setCity("Lublin");
+        CreateCinemaCommand c3 = new CreateCinemaCommand();
+        c3.setName("Plaza");
+        c3.setCity("Lublin");
+        createCinemaHandler.handle(c1);
+        createCinemaHandler.handle(c2);
+        createCinemaHandler.handle(c3);
+
+        List<CinemaDto> cinemasList = cinemaFinder.getAll();
+        assertEquals(3, cinemasList.size());
+    }
+
+    @Test(expected = CommandInvalidException.class)
+    public void shouldNotAllowTCoPersistNullParametersAtCinema() {
+       createCinemaCommand.setCity("");
+       createCinemaCommand.setName("");
+
+       createCinemaHandler.handle(createCinemaCommand);
+    }
 }
