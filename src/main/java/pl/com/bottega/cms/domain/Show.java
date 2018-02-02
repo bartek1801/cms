@@ -14,7 +14,7 @@ public class Show {
     @ManyToOne
     private Cinema cinema;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Movie movie;
 
     private LocalDateTime date;
@@ -27,6 +27,10 @@ public class Show {
         this.cinema = cinema;
         this.movie = movie;
         this.date = date;
+    }
+
+    public  boolean isToday(LocalDateTime today){
+        return date.isEqual(today);
     }
 
     public Long getId() {

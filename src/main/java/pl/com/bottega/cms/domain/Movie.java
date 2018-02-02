@@ -27,8 +27,9 @@ public class Movie {
 
     private Integer length;
 
-    @OneToMany(mappedBy = "movie")
-    private Collection<Show> shows = new LinkedList<>();
+    @OneToMany //(mappedBy = "movie")
+    @JoinColumn(name = "movie_id")
+    private Set<Show> shows = new HashSet<>();
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -40,7 +41,7 @@ public class Movie {
         this.length = length;
     }
 
-    Movie() {}
+    public Movie() {}
 
     public Long getId() {
         return id;
@@ -70,7 +71,7 @@ public class Movie {
         return length;
     }
 
-    public Collection<Show> getShows() {
+    public Set<Show> getShows() {
         return shows;
     }
 }
