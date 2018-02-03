@@ -1,14 +1,17 @@
 package pl.com.bottega.cms.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tickets")
 public class Ticket {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String kind;
+
     private int count;
 
     @ManyToOne

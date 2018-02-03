@@ -1,22 +1,26 @@
 package pl.com.bottega.cms.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
+
     private String phone;
 
     @OneToMany(mappedBy = "customer")
-    @JoinColumn(name = "customer_id")
+    //@JoinColumn(name = "customer_id")
     private Set<Reservation> reservations;
 
     public Customer() {

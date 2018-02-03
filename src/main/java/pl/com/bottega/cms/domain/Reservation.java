@@ -19,7 +19,7 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation")
     private Set<Ticket> tickets;
 
-    @OneToMany(mappedBy = "seat")
+    @OneToMany
     private Set<Seat> seats;
 
     public Reservation() {
