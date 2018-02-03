@@ -11,7 +11,7 @@ import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 import javax.transaction.Transactional;
 
 @Component
-public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
+public class CreateCinemaHandler implements Handler<CreateCinemaCommand, Void> {
 
     public static final String FIELD_CAN_T_BE_EMPTY_ERROR = "Field can't be empty";
     private CinemaRepository cinemaRepository;
@@ -23,10 +23,11 @@ public class CreateCinemaHandler implements Handler<CreateCinemaCommand> {
 
     @Override
     @Transactional
-    public void handle(CreateCinemaCommand command) {
+    public Void handle(CreateCinemaCommand command) {
         validateCinemaPresence(command);
         validateCinemaParameters(command);
         cinemaRepository.save(new Cinema(command.getName(), command.getCity()));
+        return null;
     }
 
     private void validateCinemaPresence(CreateCinemaCommand command) {

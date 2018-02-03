@@ -10,10 +10,13 @@ import java.util.Set;
 
 public class CreateReservationCommand implements Command {
 
-    Long showId;
-    Customer customer;
-    Set<Ticket> tickets;
-    Set<Seat> seats;
+    private Long showId;
+
+    private Customer customer;
+
+    private Set<Ticket> tickets;
+
+    private Set<Seat> seats;
 
     public Long getShowId() {
         return showId;

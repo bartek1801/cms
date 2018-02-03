@@ -7,7 +7,7 @@ import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
 @Component
-public class CreateMovieHandler implements Handler<CreateMovieCommand> {
+public class CreateMovieHandler implements Handler<CreateMovieCommand, Void> {
 
      private MovieRepository repository;
 
@@ -16,10 +16,11 @@ public class CreateMovieHandler implements Handler<CreateMovieCommand> {
      }
 
      @Transactional
-     public void handle(CreateMovieCommand cmd) {
+     public Void handle(CreateMovieCommand cmd) {
           Movie movie = new Movie(cmd.getTitle(), cmd.getDescription(), cmd.getActors(),
                   cmd.getGenres(), cmd.getMinAge(), cmd.getLength());
           repository.save(movie);
+         return null;
      }
 
 

@@ -12,17 +12,29 @@ import java.util.Set;
 @Table(name = "cinema_halls")
 public class CinemaHall {
 
+    public static final int ROWS = 10;
+    public static final int SEATS = 15;
+
     @Id
     @GeneratedValue
     private Long id;
 
-    private boolean [][] seats;
+    private boolean [][] seats =  new boolean[ROWS][SEATS];
 
     public CinemaHall(Set<Reservation> currentReservations){
-        //TODO - wypełnić tablicę seats i sprawdzić rezerwację
+        //TODO - wypełnić tablicę seats
+        for (Reservation reservation : currentReservations){
+            Set<Seat> reservedSeats = reservation.getSeats();
+            for (Seat seat : reservedSeats) {
+                seats[seat.getRow()][seat.getSeatNumber()] = true;
+            }
+        }
     }
 
     public void checkReservation(CreateReservationCommand cmd){
 
+        //throw CommanValodationException
     }
+
+
 }

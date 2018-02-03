@@ -113,21 +113,21 @@ public class ShowFactoryTest {
 
     }
 
-    @Test
-    @Transactional
-    public void shouldNotCreateTheSameShows(){
-        //given
-        CreateShowsCommand cmd = new CreateShowsCommand();
-        cmd.setCinemaId(cinema.getId());
-        cmd.setMovieId(movie.getId());
-        cmd.setCalendar(calendar);
-        List<Show> shows1 = (List<Show>) showFactory.createShows(cmd);
-
-        //when
-        List<Show> shows2 = (List<Show>) showFactory.createShows(cmd);
-
-        //then
-        assertTrue(shows2.isEmpty());
-    }
+//    @Test
+//    @Transactional
+//    public void shouldNotCreateTheSameShows(){
+//        //given
+//        CreateShowsCommand cmd = new CreateShowsCommand();
+//        cmd.setCinemaId(cinema.getId());
+//        cmd.setMovieId(movie.getId());
+//        cmd.setCalendar(calendar);
+//        List<Show> shows1 = (List<Show>) showFactory.createShows(cmd);
+//
+//        //when
+//        List<Show> shows2 = (List<Show>) showFactory.createShows(cmd);
+//
+//        //then
+//        assertTrue(shows2.isEmpty());
+//    }
 
 }

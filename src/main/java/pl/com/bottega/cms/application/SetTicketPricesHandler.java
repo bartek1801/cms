@@ -8,7 +8,7 @@ import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
 
 @Component
-public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand>{
+public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand, Void>{
 
     private MovieRepository movieRepository;
 
@@ -17,10 +17,11 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand>{
     }
 
     @Transactional
-    public void handle(SetTicketPricesCommand cmd) {
+    public Void handle(SetTicketPricesCommand cmd) {
         Movie movie = movieRepository.get(cmd.getMovieId());
         movie.setPrices(cmd);
         movieRepository.save(movie);
+        return null;
     }
 
     @Override
