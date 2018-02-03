@@ -11,7 +11,7 @@ public class TicketPricess {
 
     @Id
     private Long id;
-    
+
     @ElementCollection
     private Map<String, BigDecimal> prices = new HashMap<String, BigDecimal>();
 
