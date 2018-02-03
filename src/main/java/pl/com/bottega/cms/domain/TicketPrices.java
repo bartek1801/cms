@@ -13,6 +13,8 @@ import java.util.Map;
         private Long id;
 
         @ElementCollection
+        @CollectionTable(name = "price", joinColumns=@JoinColumn(name="ticket_prices_id"))
+        @Column(name = "prices")
         private Map<String, BigDecimal> prices = new HashMap<>();
 
         @OneToOne()
