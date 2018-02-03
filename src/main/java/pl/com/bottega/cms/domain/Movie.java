@@ -33,8 +33,8 @@ public class Movie {
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
-    @OneToOne(mappedBy = "movie")
-    private TicketPricess ticketPricess;
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+    private TicketPrices ticketPricess;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -80,7 +80,7 @@ public class Movie {
         return shows;
     }
 
-    public TicketPricess getTicketPricess() {
+    public TicketPrices getTicketPricess() {
         return ticketPricess;
     }
     
