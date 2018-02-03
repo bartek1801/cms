@@ -1,10 +1,8 @@
 package pl.com.bottega.cms.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -13,8 +11,9 @@ public class TicketPricess {
 
     @Id
     private Long id;
-
-    private Map<String, BigDecimal> prices;
+    
+    @ElementCollection
+    private Map<String, BigDecimal> prices = new HashMap<String, BigDecimal>();
 
     @OneToOne()
     private Movie movie;

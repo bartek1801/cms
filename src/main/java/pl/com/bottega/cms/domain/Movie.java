@@ -33,7 +33,7 @@ public class Movie {
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
-    @OneToOne(mappedBy = "movie")
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
     private TicketPricess ticketPricess;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
@@ -83,9 +83,9 @@ public class Movie {
     public TicketPricess getTicketPricess() {
         return ticketPricess;
     }
-    
-    public void setPrices(SetTicketPricesCommand command) {
 
+    public void setPrices(SetTicketPricesCommand command) {
+        if(command.getPrices().containsKey(command.getMovieId()));
     }
 
 }
