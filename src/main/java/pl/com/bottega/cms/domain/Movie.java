@@ -85,7 +85,11 @@ public class Movie {
     }
     
     public void setPrices(SetTicketPricesCommand command) {
-
+        if(ticketPricess.getId() != null)
+            ticketPricess.setPrices(command.getPrices());
+        else{
+            ticketPricess = new TicketPrices(command.getMovieId(), command.getPrices());
+        }
     }
 
 }
