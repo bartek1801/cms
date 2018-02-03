@@ -83,7 +83,7 @@ public class Movie {
     public TicketPricess getTicketPricess() {
         return ticketPricess;
     }
-    
+
     public void setPrices(SetTicketPricesCommand command) {
 
     }
