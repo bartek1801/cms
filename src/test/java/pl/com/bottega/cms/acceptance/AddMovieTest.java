@@ -31,7 +31,7 @@ public class AddMovieTest extends AcceptanceTest {
     @Before
     public void createMovie(){
         cmd = new CreateMovieCommand();
-        cmd.setActors(new HashSet<String>(Arrays.asList("John Travolta")));
+        cmd.setActors(new HashSet<>(Arrays.asList("John Travolta")));
         cmd.setDescription("Royale with cheese");
         cmd.setGenres(new HashSet<>(Arrays.asList("Sensacyjny")));
         cmd.setMinAge(17);

@@ -55,7 +55,7 @@ public class FindAllMoviesTest extends AcceptanceTest {
         //then
         assertThat(movies.isEmpty());
     }
-//TODO 
+
 //    @Test
 //    @Transactional
 //    public void shouldReturnSomeMoviesOnAGivenDay() {
@@ -84,44 +84,45 @@ public class FindAllMoviesTest extends AcceptanceTest {
 //        assertThat(movies.get(0).getLength()).isEqualTo(Integer.valueOf(120));
 //    }
 
-//TODO
-//    @Test
-//    @Transactional
-//    public void shouldReturnAllMoviesOnAGivenDay() {
-//        //given
-//
-//        Set<String> actors = new HashSet<String>();
-//        actors.add("John Travolta");
-//        actors.add("Keanu Reeves");
-//
-//        Set<String> genres = new HashSet<String>();
-//        genres.add("Sensacyjny");
-//        genres.add("Dramat");
-//
-//        Movie movie1 = new Movie("Pulp Fiction", "Royale with cheese", actors, genres,17, 120);
-//        entityManager.persist(movie1);
-//
-//        Movie movie2 = new Movie("John Wick", "Best movie ever", actors, genres, 12, 300);
-//        entityManager.persist(movie2);
-//
-//
-//        //when
-//        List<MovieDto> movies = movieFinder.getFromDay(Long.valueOf(1), (LocalDate.parse("2017-12-28")));
-//
-//        //then
-//        assertThat(movies.size()).isEqualTo(2);
-//
-//        assertThat(movies.get(0).getTitle()).isEqualTo("Pulp Fiction");
-//        assertThat(movies.get(0).getDescription()).isEqualTo("Royale with cheese");
-//        assertThat(movies.get(0).getActors()).isEqualTo("John Travolta");
-//        assertThat(movies.get(0).getGenres()).isEqualTo("Sensacyjny");
-//        assertThat(movies.get(0).getMinAge()).isEqualTo(17);
-//        assertThat(movies.get(0).getLength()).isEqualTo(120);
-//        assertThat(movies.get(1).getTitle()).isEqualTo("John Wick");
-//        assertThat(movies.get(1).getDescription()).isEqualTo("Best movie ever");
-//        assertThat(movies.get(1).getActors()).isEqualTo("Keanu Reeves");
-//        assertThat(movies.get(1).getGenres()).isEqualTo("Dramat");
-//        assertThat(movies.get(1).getMinAge()).isEqualTo(12);
-//        assertThat(movies.get(1).getLength()).isEqualTo(300);
-//    }
+
+    @Test
+    @Transactional
+    public void shouldReturnAllMoviesOnAGivenDay() {
+        //given
+
+        Set<String> actors = new HashSet<String>();
+        actors.add("John Travolta");
+        actors.add("Keanu Reeves");
+
+        Set<String> genres = new HashSet<String>();
+        genres.add("Sensacyjny");
+        genres.add("Dramat");
+
+        Movie movie1 = new Movie("Pulp Fiction", "Royale with cheese", actors, genres,17, 120);
+        entityManager.persist(movie1);
+
+        Movie movie2 = new Movie("John Wick", "Best movie ever", actors, genres, 12, 300);
+        entityManager.persist(movie2);
+
+
+        //when
+        List<MovieDto> movies = movieFinder.getFromDay(Long.valueOf(1), (LocalDate.parse("2017-12-28")));
+
+        //then
+        assertThat(movies.size()).isEqualTo(2);      entityManager.flush();
+
+
+        assertThat(movies.get(0).getTitle()).isEqualTo("Pulp Fiction");
+        assertThat(movies.get(0).getDescription()).isEqualTo("Royale with cheese");
+        assertThat(movies.get(0).getActors()).isEqualTo("John Travolta");
+        assertThat(movies.get(0).getGenres()).isEqualTo("Sensacyjny");
+        assertThat(movies.get(0).getMinAge()).isEqualTo(17);
+        assertThat(movies.get(0).getLength()).isEqualTo(120);
+        assertThat(movies.get(1).getTitle()).isEqualTo("John Wick");
+        assertThat(movies.get(1).getDescription()).isEqualTo("Best movie ever");
+        assertThat(movies.get(1).getActors()).isEqualTo("Keanu Reeves");
+        assertThat(movies.get(1).getGenres()).isEqualTo("Dramat");
+        assertThat(movies.get(1).getMinAge()).isEqualTo(12);
+        assertThat(movies.get(1).getLength()).isEqualTo(300);
+    }
 }
