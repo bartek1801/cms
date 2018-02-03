@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.domain;
 
+import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -30,6 +32,9 @@ public class Movie {
     @OneToMany //(mappedBy = "movie")
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
+
+    @OneToOne(mappedBy = "movie")
+    private TicketPricess ticketPricess;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -74,4 +79,13 @@ public class Movie {
     public Set<Show> getShows() {
         return shows;
     }
+
+    public TicketPricess getTicketPricess() {
+        return ticketPricess;
+    }
+    
+    public void setPrices(SetTicketPricesCommand command) {
+
+    }
+
 }

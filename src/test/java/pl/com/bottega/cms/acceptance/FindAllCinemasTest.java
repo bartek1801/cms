@@ -71,7 +71,7 @@ public class FindAllCinemasTest extends AcceptanceTest {
         //given
         Cinema cinema1 = new Cinema("Plaza", "Lublin");
         entityManager.persist(cinema1);
-        Cinema cinema2 = new Cinema("Bajkał", "Moskwa");
+        Cinema cinema2 = new Cinema("Bajkal", "Moskwa");
         entityManager.persist(cinema2);
 
         //when
@@ -82,7 +82,7 @@ public class FindAllCinemasTest extends AcceptanceTest {
 
         assertThat(cinemas.get(0).getName()).isEqualTo("Plaza");
         assertThat(cinemas.get(0).getCity()).isEqualTo("Lublin");
-        assertThat(cinemas.get(1).getName()).isEqualTo("Bajkał");
+        assertThat(cinemas.get(1).getName()).isEqualTo("Bajkal");
         assertThat(cinemas.get(1).getCity()).isEqualTo("Moskwa");
     }
 }

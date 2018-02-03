@@ -54,8 +54,6 @@ public class ShowFactory {
             }
         }
     }
-    
-
 
     private void createShowWithoutCalendar(CreateShowsCommand command, Cinema cinema, Movie movie, Collection<Show> showsList) {
         command.getDates().stream().forEach(dateTime -> {
