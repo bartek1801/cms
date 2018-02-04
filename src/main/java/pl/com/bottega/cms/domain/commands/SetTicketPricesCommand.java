@@ -37,7 +37,7 @@ public class SetTicketPricesCommand implements Command {
 
     private void validateNegativeValues(Map<String, BigDecimal> prices, ValidationErrors errors) {
         for(BigDecimal price: prices.values()){
-            if(price.compareTo(BigDecimal.ZERO) <= 0 )
+            if(price.compareTo(BigDecimal.ZERO) < 0 )
                 errors.add("ticketRequiredPrices", "price must be greater than zero");
         }
     }

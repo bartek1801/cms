@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.domain;
 
+import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -64,5 +66,9 @@ public class Show {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public Receipt calculatePrice(CalculatePricesCommand command) {
+        return movie.calculatePrice(command); //TODO
     }
 }

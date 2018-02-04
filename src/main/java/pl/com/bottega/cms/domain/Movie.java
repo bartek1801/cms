@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.domain;
 
+import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 
 import javax.persistence.*;
@@ -94,4 +95,7 @@ public class Movie {
         }
     }
 
+    public Receipt calculatePrice(CalculatePricesCommand command) {
+        return ticketPricess.calculatePrice(command);
+    }
 }
