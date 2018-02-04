@@ -33,12 +33,13 @@ public class CreateShowsCommand implements Command {
         if (calendar != null) {
             validatePresence(errors, "calendar: fromDate", calendar.getFromDate());
             validatePresence(errors, "calendar: untilDate", calendar.getUntilDate());
+            //validatePresence(errors, "calendar: weekDays", calendar.getWeekDays());
 
-            if (calendar.getHours().isEmpty() || calendar.getHours() == null) {
+            if (calendar.getHours() == null || calendar.getHours().isEmpty() ) {
                 errors.add("calendar: hours ", "hours set is empty or blank");
             }
-            if (calendar.getWeekDays().isEmpty()) {
-                errors.add("calendar: weekDays ", "weekDays set is empty");
+            if (calendar.getWeekDays() == null || calendar.getWeekDays().isEmpty()) {
+                errors.add("calendar: weekDays ", "weekDays set is empty or blank");
             }
 
             validateCorrectnessWeekOfDays(errors, calendar.getWeekDays());
@@ -47,7 +48,7 @@ public class CreateShowsCommand implements Command {
     }
 
     private void validateCorrectnessWeekOfDays(ValidationErrors errors, Set<String> weekDays) {
-        if ( !weekDays.stream().allMatch(day -> validateDayOfWeek(day))){
+        if ( weekDays != null && !weekDays.stream().allMatch(day -> validateDayOfWeek(day))){
             errors.add("calendar: weekDays ", "weekDays names must be real");
         }
     }
