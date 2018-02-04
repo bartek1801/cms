@@ -24,4 +24,9 @@ public class SetTicketPricesCommand implements Command {
     public void setPrices(Map<String, BigDecimal> prices) {
         this.prices = prices;
     }
+
+    public void validate(ValidationErrors errors) {
+        validatePresence(errors, "movieId", movieId);
+        validatePresence(errors, "prices", prices);
+    }
 }

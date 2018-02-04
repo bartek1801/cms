@@ -10,6 +10,7 @@ import java.util.Map;
     public class TicketPrices {
 
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
         @ElementCollection
@@ -22,7 +23,7 @@ import java.util.Map;
 
         public TicketPrices(){}
 
-        public TicketPrices(Long id, Map<String, BigDecimal> prices ) {
+        public TicketPrices(Long id, Map<String, BigDecimal> prices) {
             this.id = id;
             this.prices = prices;
         }
