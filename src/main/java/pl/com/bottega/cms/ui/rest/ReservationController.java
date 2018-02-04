@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.com.bottega.cms.application.CommandGateway;
+import pl.com.bottega.cms.application.ReservationNumberDto;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/reservations")
@@ -20,9 +19,9 @@ public class ReservationController {
     }
 
     @PutMapping
-    public Long create(@RequestBody CreateReservationCommand cmd){
-        Long id = gateway.execute(cmd);
-        return id; //TODO zmianić na ReservationDto
+    public ReservationNumberDto create(@RequestBody CreateReservationCommand cmd){
+        ReservationNumberDto reservationNumber = gateway.execute(cmd);
+        return reservationNumber;
     }
 
 

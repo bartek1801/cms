@@ -57,7 +57,7 @@ public class CinemaHall {
     }
 
     private void ckeckSeatNumbers(Set<Seat> seats) {
-
+        //TODO sprawdzenie czy miejsca są obok siebie
     }
 
     private void checkSeatsAvailability(Set<Seat> commandSeats) {
