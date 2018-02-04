@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.com.bottega.cms.application.CommandGateway;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -22,6 +24,7 @@ public class ReservationController {
         Long id = gateway.execute(cmd);
         return id; //TODO zmianić na ReservationDto
     }
+
 
 
 }

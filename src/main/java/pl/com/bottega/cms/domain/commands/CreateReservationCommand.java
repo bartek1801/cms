@@ -8,6 +8,7 @@ import pl.com.bottega.cms.domain.Ticket;
 
 import java.util.Set;
 
+
 public class CreateReservationCommand implements Command {
 
     private Long showId;
@@ -17,6 +18,8 @@ public class CreateReservationCommand implements Command {
     private Set<Ticket> tickets;
 
     private Set<Seat> seats;
+
+    private final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     public Long getShowId() {
         return showId;
@@ -50,7 +53,53 @@ public class CreateReservationCommand implements Command {
         this.seats = seats;
     }
 
-    public void validate(ValidationErrors errors){
-        //TODO
+
+    public void validate(ValidationErrors errors) {
+        validatePresence(errors, "showId", showId);
+        validatePresence(errors, "tickets", tickets);
+        validatePresence(errors, "seats", seats);
+        validatePresence(errors, "customer", customer);
+        validatePresence(errors, "firsName", customer.getFirstName());
+        validatePresence(errors, "lastName", customer.getLastName());
+        validateWithPattern(errors, "email", customer.getEmail(), EMAIL_REGEX);
+        validatePresence(errors, "phone", customer.getPhone());
+    }
+
+    public void validateTickets(ValidationErrors errors) {
+        if (tickets.isEmpty()) {
+            errors.add("ticket", "you must add at least one ticket");
+        }
+    }
+
+    private void validateSeatsRows(ValidationErrors errors, Set<Seat> seats) {
+
+        for (Seat seat : seats) {
+            if (seat.getRow() <= 0 && seat.getRow() > 10) {
+                errors.add("seats", "row must be between 1 and 10");
+            }
+        }
+    }
+
+    private void validateSeatsNumbers(ValidationErrors errors, Set<Seat> seats) {
+        for (Seat seat : seats) {
+            if (seat.getSeatNumber() <= 0 && seat.getSeatNumber() >= 15) {
+                errors.add("seats", "seat number from 1 to 15");
+            }
+        }
+    }
+
+    private void validateCustomerDetails(ValidationErrors errors, Customer customers) {
+        validatePresence(errors, "customer: first name", customer.getFirstName());
+        validatePresence(errors, "customer: last name", customer.getLastName());
+        validatePresence(errors, "customer: email address", customer.getEmail());
+        validatePresence(errors, "customer: phone number", customer.getPhone());
+//            if (customer.getFirstName().isEmpty() && customer.getLastName().isEmpty() && customer.getEmail().isEmpty() && customer.getPhone().isEmpty()) {
+//                errors.add("customers", "all fields must be completed");
+    }
+
+    private void validateWithPattern(ValidationErrors errors, String email, String customerEmail, String emailFormat) {
+        if (email != null && email.matches(emailFormat)) {
+            errors.add(email, "invalid format");
+        }
     }
 }

@@ -17,7 +17,6 @@ public class Ticket {
     @ManyToOne
     private Reservation reservation;
 
-
     public Ticket() {
     }
 
