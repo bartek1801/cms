@@ -28,5 +28,7 @@ public class CalculatePricesCommand implements Command {
 
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "showId", showId);
+        validatePresence(errors, "tickets", tickets);
+
     }
 }
