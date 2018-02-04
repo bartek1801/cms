@@ -53,7 +53,6 @@ public class CreateReservationCommand implements Command {
         this.seats = seats;
     }
 
-
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "showId", showId);
         validatePresence(errors, "tickets", tickets);
@@ -63,7 +62,9 @@ public class CreateReservationCommand implements Command {
         validatePresence(errors, "lastName", customer.getLastName());
         validateWithPattern(errors, "email", customer.getEmail(), EMAIL_REGEX);
         validatePresence(errors, "phone", customer.getPhone());
-
+        validateTickets(errors);
+        validateSeatsNumbers(errors, seats);
+        validateSeatsRows(errors, seats);
     }
 
     public void validateTickets(ValidationErrors errors) {
@@ -73,7 +74,6 @@ public class CreateReservationCommand implements Command {
     }
 
     private void validateSeatsRows(ValidationErrors errors, Set<Seat> seats) {
-
         for (Seat seat : seats) {
             if (seat.getRow() <= 0 && seat.getRow() > 10) {
                 errors.add("seats", "row must be between 1 and 10");
@@ -88,16 +88,6 @@ public class CreateReservationCommand implements Command {
             }
         }
     }
-
-    private void validateCustomerDetails(ValidationErrors errors, Customer customers) {
-        validatePresence(errors, "customer: first name", customer.getFirstName());
-        validatePresence(errors, "customer: last name", customer.getLastName());
-        validatePresence(errors, "customer: email address", customer.getEmail());
-        validatePresence(errors, "customer: phone number", customer.getPhone());
-//            if (customer.getFirstName().isEmpty() && customer.getLastName().isEmpty() && customer.getEmail().isEmpty() && customer.getPhone().isEmpty()) {
-//                errors.add("customers", "all fields must be completed");
-    }
-
     private void validateWithPattern(ValidationErrors errors, String email, String customerEmail, String emailFormat) {
         if (email != null && email.matches(emailFormat)) {
             errors.add(email, "invalid format");
