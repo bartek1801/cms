@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.commands.CreateShowsCommand;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
-import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

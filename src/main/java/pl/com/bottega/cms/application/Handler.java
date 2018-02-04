@@ -2,9 +2,9 @@ package pl.com.bottega.cms.application;
 
 import pl.com.bottega.cms.domain.commands.Command;
 
-public interface Handler<C extends Command> {
+public interface Handler<C extends Command, R> {
 
-    void handle(C command);
+    R handle(C command);
 
     Class<? extends Command> getSupportedCommandClass();
 

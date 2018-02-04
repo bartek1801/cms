@@ -2,11 +2,13 @@ package pl.com.bottega.cms.ui.rest;
 
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.CommandGateway;
+import pl.com.bottega.cms.application.MovieDto;
+import pl.com.bottega.cms.application.MovieFinder;
 import pl.com.bottega.cms.domain.commands.CreateMovieCommand;
 import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 
-import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,9 +16,11 @@ import java.util.Map;
 public class MovieController {
 
     private CommandGateway gateway;
+    private MovieFinder movieFinder;
 
-    public MovieController(CommandGateway gateway) {
+    public MovieController(CommandGateway gateway, MovieFinder movieFinder) {
         this.gateway = gateway;
+        this.movieFinder = movieFinder;
     }
 
     @PutMapping
@@ -30,5 +34,10 @@ public class MovieController {
         command.setMovieId(id);
         command.setPrices(prices);
         gateway.execute(command);
+    }
+
+    @GetMapping("/{id}")
+    public MovieDto get(@PathVariable Long id) {
+        return movieFinder.get(id);
     }
 }
