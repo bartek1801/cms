@@ -2,20 +2,14 @@ package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "seats")
+@Embeddable
 public class Seat {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
     private Integer row;
 
     private Integer seat;
 
-    @ManyToOne
-    private Reservation reservation;
 
     public Seat() {
     }

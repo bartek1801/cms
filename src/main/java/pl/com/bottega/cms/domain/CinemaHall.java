@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.domain;
 
+import pl.com.bottega.cms.domain.commands.CommandInvalidException;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import pl.com.bottega.cms.domain.commands.ValidationErrors;
 
@@ -51,16 +52,22 @@ public class CinemaHall {
     }
 
     public void checkReservation(CreateReservationCommand command) {
-        ValidationErrors errors = new ValidationErrors();
-        checkSeatsAvailability(command.getSeats(), errors);
+        checkSeatsAvailability(command.getSeats());
+        ckeckSeatNumbers(command.getSeats());
     }
 
-    private void checkSeatsAvailability(Set<Seat> commandSeats, ValidationErrors errors) {
+    private void ckeckSeatNumbers(Set<Seat> seats) {
+
+    }
+
+    private void checkSeatsAvailability(Set<Seat> commandSeats) {
         for (Seat seat : commandSeats) {
             Integer row = seat.getRow();
             Integer seatNo = seat.getSeat();
-            if (seats[row][seatNo] == true) {
+            if (seats[row - 1][seatNo - 1]) {
+                ValidationErrors errors = new ValidationErrors();
                 errors.add("seats", "Seat no " + seatNo + " in row " + row + " is already reserved ");
+                throw new CommandInvalidException(errors);
             }
         }
     }

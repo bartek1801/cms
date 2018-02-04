@@ -29,9 +29,7 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
         Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);
         cinemaHall.checkReservation(command);
-
         reservationRepository.save(reservation);
-
         return reservation .getId();
     }
 

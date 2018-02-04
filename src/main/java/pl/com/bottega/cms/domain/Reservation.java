@@ -15,13 +15,13 @@ public class Reservation {
 
     private Long showId;
 
-    @ManyToOne
+    @Embedded
     private Customer customer;
 
-    @OneToMany(mappedBy = "reservation")
+    @ElementCollection
     private Set<Ticket> tickets;
 
-    @OneToMany
+    @ElementCollection
     private Set<Seat> seats;
 
     public Reservation() {

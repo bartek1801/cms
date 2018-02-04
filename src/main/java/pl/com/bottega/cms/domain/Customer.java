@@ -3,13 +3,9 @@ package pl.com.bottega.cms.domain;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "customers")
+@Embeddable
 public class Customer {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
     private String firstName;
 
@@ -18,10 +14,6 @@ public class Customer {
     private String email;
 
     private String phone;
-
-    @OneToMany(mappedBy = "customer")
-    //@JoinColumn(name = "customer_id")
-    private Set<Reservation> reservations;
 
     public Customer() {
     }
@@ -58,11 +50,4 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 }

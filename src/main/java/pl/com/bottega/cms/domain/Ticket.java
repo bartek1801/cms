@@ -2,20 +2,14 @@ package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "tickets")
+@Embeddable
 public class Ticket {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
     private String kind;
 
     private int count;
 
-    @ManyToOne
-    private Reservation reservation;
 
     public Ticket() {
     }
@@ -36,11 +30,5 @@ public class Ticket {
         this.count = count;
     }
 
-    public Reservation getReservation() {
-        return reservation;
-    }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
 }

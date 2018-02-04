@@ -63,6 +63,7 @@ public class CreateReservationCommand implements Command {
         validatePresence(errors, "lastName", customer.getLastName());
         validateWithPattern(errors, "email", customer.getEmail(), EMAIL_REGEX);
         validatePresence(errors, "phone", customer.getPhone());
+
     }
 
     public void validateTickets(ValidationErrors errors) {
