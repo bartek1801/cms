@@ -1,5 +1,7 @@
 package pl.com.bottega.cms.domain.commands;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
@@ -7,6 +9,7 @@ import java.util.Set;
 
 public class ShowsCalendar {
 
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     private LocalDateTime fromDate, untilDate;
 
     private Set<String> weekDays;
