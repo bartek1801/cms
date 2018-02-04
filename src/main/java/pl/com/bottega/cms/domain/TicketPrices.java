@@ -12,13 +12,12 @@ import java.util.Map;
         @Id
         private Long id;
 
+
         @ElementCollection
-        @CollectionTable(name = "price", joinColumns=@JoinColumn(name="ticket_prices_id"))
-        @Column(name = "prices")
         private Map<String, BigDecimal> prices = new HashMap<>();
 
-        @OneToOne()
-        private Movie movie;
+//        @OneToOne()
+//        private Movie movie;
 
         public TicketPrices(){}
 

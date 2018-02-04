@@ -35,6 +35,7 @@ public class MovieController {
         command.setPrices(prices);
         gateway.execute(command);
     }
+
     @GetMapping("/{id}")
     public MovieDto get(@PathVariable Long id) {
         return movieFinder.get(id);

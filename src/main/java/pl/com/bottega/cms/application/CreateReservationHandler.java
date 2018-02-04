@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.CinemaHall;
 import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.commands.Command;
+import pl.com.bottega.cms.domain.commands.CommandInvalidException;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 
@@ -27,9 +28,11 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
         Reservation reservation = new Reservation(command);
         Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);
+        cinemaHall.checkReservation(command);
 
         reservationRepository.save(reservation);
-        return reservation.getId();
+
+        return reservation .getId();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.ui.rest;
 
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.com.bottega.cms.application.CommandGateway;
@@ -17,7 +18,7 @@ public class ReservationController {
     }
 
     @PutMapping
-    public Long create(CreateReservationCommand cmd){
+    public Long create(@RequestBody CreateReservationCommand cmd){
         Long id = gateway.execute(cmd);
         return id; //TODO zmianić na ReservationDto
     }
