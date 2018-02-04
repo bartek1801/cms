@@ -13,11 +13,12 @@ public class CreateReservationCommand implements Command {
 
     private Long showId;
 
-    private Customer customer;
-
     private Set<Ticket> tickets;
 
     private Set<Seat> seats;
+
+    private Customer customer;
+
 
     private final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 

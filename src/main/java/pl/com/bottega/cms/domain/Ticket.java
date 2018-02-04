@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Embeddable
 public class Ticket {

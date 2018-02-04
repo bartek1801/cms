@@ -28,6 +28,7 @@ public class Reservation {
     }
 
     public Reservation(CreateReservationCommand cmd) {
+        this.showId = cmd.getShowId();
         this.customer = cmd.getCustomer();
         this.tickets = cmd.getTickets();
         this.seats = cmd.getSeats();
@@ -39,6 +40,14 @@ public class Reservation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getShowId() {
+        return showId;
+    }
+
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 
     public Customer getCustomer() {

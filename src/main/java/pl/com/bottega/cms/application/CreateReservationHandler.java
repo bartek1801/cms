@@ -23,7 +23,6 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     @Override
     @Transactional
     public ReservationNumberDto handle(CreateReservationCommand command) {
-        //TODO zamiast Long zwrócić np ReservationNumberDto
         Reservation reservation = new Reservation(command);
         Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);
