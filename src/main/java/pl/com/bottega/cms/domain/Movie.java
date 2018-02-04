@@ -33,7 +33,7 @@ public class Movie {
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
-    @OneToOne//(cascade = CascadeType.ALL)
+    @Embedded
     private TicketPrices ticketPricess;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
@@ -84,14 +84,14 @@ public class Movie {
         return ticketPricess;
     }
 
+
+
     public void setPrices(SetTicketPricesCommand command) {
-        TicketPrices newTicketPricess = new TicketPrices(command.getMovieId(), command.getPrices());
-        ticketPricess = newTicketPricess;
-//        if (ticketPricess != newTicketPricess) {
-//            ticketPricess = newTicketPricess;
-//        } else {
-//            ticketPricess.setPrices(command.getPrices());
-//        }
+        if(ticketPricess != null)
+            ticketPricess.setPrices(command.getPrices());
+        else{
+            ticketPricess = new TicketPrices(command.getMovieId(), command.getPrices());
+        }
     }
 
 }

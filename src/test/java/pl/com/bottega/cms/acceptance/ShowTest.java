@@ -119,28 +119,5 @@ public class ShowTest extends AcceptanceTest {
         assertThat(showsFromDay.get(0).getShows().size()).isEqualTo(3);
     }
 
-    @Test
-    public void shouldCreateShowFromDateRequest(){
-        //given
-        CreateShowsCommand cmd = createShows("dates");
-
-        //when
-        Collection<Show> shows = showFactory.createShows(cmd);
-
-        //then
-        assertEquals(3, shows.size());
-    }
-
-    @Test
-    public void shouldCreateShowsFromCalendarRequest(){
-        //given
-        CreateShowsCommand cmd = createShows("calendar");
-
-        //when
-        Collection<Show> shows = showFactory.createShows(cmd);
-
-        //then
-        assertEquals(4, shows.size());
-    }
 
 }
