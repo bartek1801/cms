@@ -23,15 +23,12 @@ public class CreateShowsCommand implements Command {
 
         if (dates == null && calendar == null) {
             errors.add("dates & calendar", "enter dates or calendar");
-            throw new CommandInvalidException(errors);
         }
         if (dates != null && calendar != null){
             errors.add("dates & calendar", "enter dates OR calendar, not both");
-            throw new CommandInvalidException(errors);
         }
         if (dates!= null && dates.isEmpty()){
             errors.add("dates", "dates can't be empty");
-            throw new CommandInvalidException(errors);
         }
         if (calendar != null) {
             validatePresence(errors, "calendar: fromDate", calendar.getFromDate());
@@ -39,11 +36,9 @@ public class CreateShowsCommand implements Command {
 
             if (calendar.getHours().isEmpty() || calendar.getHours() == null) {
                 errors.add("calendar: hours ", "hours set is empty or blank");
-                throw new CommandInvalidException(errors);
             }
             if (calendar.getWeekDays().isEmpty()) {
                 errors.add("calendar: weekDays ", "weekDays set is empty");
-                throw new CommandInvalidException(errors);
             }
 
             validateCorrectnessWeekOfDays(errors, calendar.getWeekDays());
