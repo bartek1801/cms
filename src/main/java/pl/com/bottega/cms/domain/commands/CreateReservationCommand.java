@@ -75,7 +75,7 @@ public class CreateReservationCommand implements Command {
 
     private void validateSeatsRows(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getRow() <= 0 && seat.getRow() > 10) {
+            if (seat.getRow() <= 0 || seat.getRow() > 10) {
                 errors.add("seats", "row must be between 1 and 10");
             }
         }
@@ -83,14 +83,14 @@ public class CreateReservationCommand implements Command {
 
     private void validateSeatsNumbers(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getSeat() <= 0 && seat.getSeat() >= 15) {
-                errors.add("seats", "seat number from 1 to 15");
+            if (seat.getSeat() <= 0 || seat.getSeat() >= 15) {
+                errors.add("seats", "seat must be between 1 and 15");
             }
         }
     }
     private void validateWithPattern(ValidationErrors errors, String email, String customerEmail, String emailFormat) {
-        if (email != null && email.matches(emailFormat)) {
-            errors.add(email, "invalid format");
+        if (customerEmail != null && !customerEmail.matches(emailFormat)) {
+            errors.add(email, "invalid mail format");
         }
     }
 }
