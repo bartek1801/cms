@@ -33,7 +33,6 @@ public class CreateShowsCommand implements Command {
         if (calendar != null) {
             validatePresence(errors, "calendar: fromDate", calendar.getFromDate());
             validatePresence(errors, "calendar: untilDate", calendar.getUntilDate());
-            //validatePresence(errors, "calendar: weekDays", calendar.getWeekDays());
 
             if (calendar.getHours() == null || calendar.getHours().isEmpty() ) {
                 errors.add("calendar: hours ", "hours set is empty or blank");

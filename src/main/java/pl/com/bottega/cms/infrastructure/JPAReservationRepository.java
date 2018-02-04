@@ -5,6 +5,8 @@ import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -23,7 +25,10 @@ public class JPAReservationRepository implements ReservationRepository{
 
     @Override
     public Set<Reservation> getReservations(Long showId) {
-
-        return null;
+        Query query = entityManager.createQuery(" FROM Reservation r WHERE r.showId = :showId");
+        query.setParameter("showId", showId);
+        Set<Reservation> result =  new HashSet<>();
+        result.addAll(query.getResultList());
+        return  result;
     }
 }

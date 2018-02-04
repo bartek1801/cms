@@ -82,7 +82,7 @@ public class CreateReservationCommand implements Command {
 
     private void validateSeatsNumbers(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getSeatNumber() <= 0 && seat.getSeatNumber() >= 15) {
+            if (seat.getSeat() <= 0 && seat.getSeat() >= 15) {
                 errors.add("seats", "seat number from 1 to 15");
             }
         }

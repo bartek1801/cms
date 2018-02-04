@@ -13,6 +13,8 @@ public class Reservation {
     @GeneratedValue
     private Long id;
 
+    private Long showId;
+
     @ManyToOne
     private Customer customer;
 

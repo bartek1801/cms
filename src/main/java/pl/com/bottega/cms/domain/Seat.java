@@ -12,7 +12,7 @@ public class Seat {
 
     private Integer row;
 
-    private Integer seatNumber;
+    private Integer seat;
 
     @ManyToOne
     private Reservation reservation;
@@ -28,11 +28,11 @@ public class Seat {
         this.row = row;
     }
 
-    public Integer getSeatNumber() {
-        return seatNumber;
+    public Integer getSeat() {
+        return seat;
     }
 
-    public void setSeatNumber(Integer seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setSeat(Integer seat) {
+        this.seat = seat;
     }
 }
