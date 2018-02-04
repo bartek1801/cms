@@ -33,8 +33,8 @@ public class Movie {
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
-    @OneToOne(mappedBy = "movie", cascade = CascadeType.MERGE)
-    private TicketPrices ticketPrices;
+    @Embedded
+    private TicketPrices ticketPricess;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -80,16 +80,18 @@ public class Movie {
         return shows;
     }
 
-    public TicketPrices getTicketPrices() {
-        return ticketPrices;
+    public TicketPrices getTicketPricess() {
+        return ticketPricess;
     }
-    
+
+
+
     public void setPrices(SetTicketPricesCommand command) {
-        if(ticketPrices == null)
-            ticketPrices = new TicketPrices(command.getMovieId(), command.getPrices());
-        else
-            ticketPrices.setPrices(command.getPrices());
+        if(ticketPricess != null)
+            ticketPricess.setPrices(command.getPrices());
+        else{
+            ticketPricess = new TicketPrices(command.getMovieId(), command.getPrices());
         }
     }
 
-
+}
