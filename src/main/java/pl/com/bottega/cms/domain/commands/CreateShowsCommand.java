@@ -1,14 +1,18 @@
 package pl.com.bottega.cms.domain.commands;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class CreateShowsCommand implements Command {
 
     Long movieId, cinemaId;
 
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     Set<LocalDateTime> dates;
 
     ShowsCalendar calendar;
@@ -29,32 +33,37 @@ public class CreateShowsCommand implements Command {
             errors.add("dates", "dates can't be empty");
             throw new CommandInvalidException(errors);
         }
-        if (calendar != null){
+        if (calendar != null) {
             validatePresence(errors, "calendar: fromDate", calendar.getFromDate());
             validatePresence(errors, "calendar: untilDate", calendar.getUntilDate());
+
+            if (calendar.getHours().isEmpty() || calendar.getHours() == null) {
+                errors.add("calendar: hours ", "hours set is empty or blank");
+                throw new CommandInvalidException(errors);
+            }
+            if (calendar.getWeekDays().isEmpty()) {
+                errors.add("calendar: weekDays ", "weekDays set is empty");
+                throw new CommandInvalidException(errors);
+            }
+
+            validateCorrectnessWeekOfDays(errors, calendar.getWeekDays());
         }
-        if (calendar.getWeekDays().isEmpty()){
-            errors.add("calendar: weekDays ", "weekDays set is empty");
-            throw new CommandInvalidException(errors);
+
+    }
+
+    private void validateCorrectnessWeekOfDays(ValidationErrors errors, Set<String> weekDays) {
+        if ( !weekDays.stream().allMatch(day -> validateDayOfWeek(day))){
+            errors.add("calendar: weekDays ", "weekDays names must be real");
         }
-        if (calendar.getHours().isEmpty() || calendar.getHours() == null){
-            errors.add("calendar: hours ", "hours set is empty or blank");
-            throw new CommandInvalidException(errors);
+    }
+
+    private boolean validateDayOfWeek(String day) {
+        try {
+            DayOfWeek.valueOf(day.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-
-
-
-//        for (String day : calendar.getWeekDays()){
-//            if (DayOfWeek.valueOf(day.toUpperCase()) instanceof DayOfWeek) {
-//            }
-//            else {
-//                errors.add("calendar: weekDays ", "weekDays names must be real");
-//                throw new CommandInvalidException(errors);
-//            }
-//        }
-
-
-
+        return true;
     }
 
 
