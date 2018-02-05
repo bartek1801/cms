@@ -34,6 +34,14 @@ public class TicketPrices {
         this.prices = prices;
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     public Receipt calculatePrice(CalculatePricesCommand command) {
         Receipt receipt = new Receipt();
         for (Ticket ticket : command.getTickets()) {
