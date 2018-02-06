@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.application;
 
 import pl.com.bottega.cms.domain.Movie;
+import pl.com.bottega.cms.domain.TicketPrices;
 
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MovieDto {
     public List<ShowDto> getShows() {
         return shows;
     }
+
+    public TicketPrices ticketPrices;
 
     public void setShows(List<ShowDto> shows) {
         this.shows = shows;
@@ -89,6 +92,14 @@ public class MovieDto {
         this.length = length;
     }
 
+    public TicketPrices getTicketPrices() {
+        return ticketPrices;
+    }
+
+    public void setTicketPrices(TicketPrices ticketPrices) {
+        this.ticketPrices = ticketPrices;
+    }
+
     public MovieDto(Movie movie) {
         this.id = movie.getId();
         this.title = movie.getTitle();
@@ -101,6 +112,7 @@ public class MovieDto {
                 .map(ShowDto::new)
                 .sorted(Comparator.comparing(ShowDto::getTime))
                 .collect(Collectors.toList());
+        this.ticketPrices = movie.getTicketPricess();
     }
 
 

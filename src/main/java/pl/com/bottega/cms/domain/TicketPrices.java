@@ -12,16 +12,16 @@ public class TicketPrices {
 
     public static final BigDecimal TICKET_DOES_NOT_EXIST = BigDecimal.valueOf(-1);
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, BigDecimal> prices = new HashMap<>();
 
-    @OneToOne()
+    @OneToOne
     private Movie movie;
 
     public TicketPrices() {
     }
 
-    public TicketPrices(Long id, Map<String, BigDecimal> prices) {
+    public TicketPrices(Map<String, BigDecimal> prices) {
         this.prices = prices;
     }
 

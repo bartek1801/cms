@@ -1,10 +1,15 @@
 package pl.com.bottega.cms.domain;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 
 import javax.persistence.*;
 import java.util.*;
+
+import static javax.persistence.CascadeType.ALL;
 
 
 @Entity
@@ -34,8 +39,8 @@ public class Movie {
     @JoinColumn(name = "movie_id")
     private Set<Show> shows = new HashSet<>();
 
-    @Embedded
-    private TicketPrices ticketPricess;
+    @Embedded()
+    private TicketPrices ticketPrices;
 
     public Movie(String title, String description, Set<String> actors, Set<String> genres,
                  Integer minAge, Integer length) {
@@ -82,20 +87,17 @@ public class Movie {
     }
 
     public TicketPrices getTicketPricess() {
-        return ticketPricess;
+        return ticketPrices;
     }
-
-
-
     public void setPrices(SetTicketPricesCommand command) {
-        if(ticketPricess != null)
-            ticketPricess.setPrices(command.getPrices());
+        if(ticketPrices != null)
+            ticketPrices.setPrices(command.getPrices());
         else{
-            ticketPricess = new TicketPrices(command.getMovieId(), command.getPrices());
+            ticketPrices = new TicketPrices(command.getPrices());
         }
     }
 
     public Receipt calculatePrice(CalculatePricesCommand command) {
-        return ticketPricess.calculatePrice(command);
+        return ticketPrices.calculatePrice(command);
     }
 }

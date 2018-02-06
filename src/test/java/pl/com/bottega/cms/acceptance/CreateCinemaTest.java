@@ -76,7 +76,7 @@ public class CreateCinemaTest extends AcceptanceTest {
     }
 
     @Test(expected = CommandInvalidException.class)
-    public void shouldNotAllowTCoPersistNullParametersAtCinema() {
+    public void shouldNotAllowToPersistNullParametersAtCinema() {
        createCinemaCommand.setCity("");
        createCinemaCommand.setName("");
 

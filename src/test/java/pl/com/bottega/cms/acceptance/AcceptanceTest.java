@@ -28,9 +28,11 @@ public class AcceptanceTest {
 
             em.createNativeQuery("DELETE FROM movie_actors").executeUpdate();
             em.createNativeQuery("DELETE FROM movie_genres").executeUpdate();
+            em.createNativeQuery("DELETE FROM movie_prices").executeUpdate();
             em.createNativeQuery("DELETE FROM movies").executeUpdate();
             em.createNativeQuery("DELETE FROM shows").executeUpdate();
             em.createNativeQuery("DELETE FROM cinemas").executeUpdate();
+
 //            em.createNativeQuery("ALTER TABLE cinemas AUTO_INCREMENT = 1").executeUpdate();
 //            em.createNativeQuery("ALTER TABLE movie_actors AUTO_INCREMENT = 1").executeUpdate();
 //            em.createNativeQuery("ALTER TABLE movie_genres AUTO_INCREMENT = 1").executeUpdate();
