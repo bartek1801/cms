@@ -5,22 +5,16 @@ import pl.com.bottega.cms.domain.Customer;
 import pl.com.bottega.cms.domain.Seat;
 import pl.com.bottega.cms.domain.Ticket;
 
-
 import java.util.Set;
 
 
 public class CreateReservationCommand implements Command {
 
-    private Long showId;
-
-    private Set<Ticket> tickets;
-
-    private Set<Seat> seats;
-
-    private Customer customer;
-
-
     private final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+    private Long showId;
+    private Set<Ticket> tickets;
+    private Set<Seat> seats;
+    private Customer customer;
 
     public Long getShowId() {
         return showId;
@@ -56,21 +50,30 @@ public class CreateReservationCommand implements Command {
 
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "showId", showId);
-        validatePresence(errors, "tickets", tickets);
-        validatePresence(errors, "seats", seats);
-        validatePresence(errors, "customer", customer);
-        validatePresence(errors, "firsName", customer.getFirstName());
-        validatePresence(errors, "lastName", customer.getLastName());
-        validateWithPattern(errors, "email", customer.getEmail(), EMAIL_REGEX);
-        validatePresence(errors, "phone", customer.getPhone());
         validateTickets(errors);
+        validateSeats(errors);
         validateSeatsNumbers(errors, seats);
         validateSeatsRows(errors, seats);
+        validatePresence(errors, "customer", customer);
+        if (customer != null) {
+            validatePresence(errors, "firstName", customer.getFirstName());
+            validatePresence(errors, "lastName", customer.getLastName());
+            validatePresence(errors, "email", customer.getEmail());
+            validateWithPattern(errors, "email_format", customer.getEmail(), EMAIL_REGEX);
+            validatePresence(errors, "phone", customer.getPhone());
+        }
     }
 
     public void validateTickets(ValidationErrors errors) {
-        if (tickets.isEmpty()) {
-            errors.add("ticket", "you must add at least one ticket");
+        if (tickets == null || tickets.isEmpty()) {
+            errors.add("ticket", "You must add at least one ticket");
+        }
+    }
+
+    public void validateSeats(ValidationErrors errors) {
+        if (seats == null || seats.isEmpty()) {
+            errors.add("Seats", "You must choose seats");
+            throw new CommandInvalidException(errors);
         }
     }
 
@@ -84,11 +87,12 @@ public class CreateReservationCommand implements Command {
 
     private void validateSeatsNumbers(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getSeat() <= 0 || seat.getSeat() >= 15) {
+            if (seat.getSeat() <= 0 || seat.getSeat() > 15) {
                 errors.add("seats", "seat must be between 1 and 15");
             }
         }
     }
+
     private void validateWithPattern(ValidationErrors errors, String email, String customerEmail, String emailFormat) {
         if (customerEmail != null && !customerEmail.matches(emailFormat)) {
             errors.add(email, "invalid mail format");
