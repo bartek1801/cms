@@ -50,7 +50,7 @@ public class CreateReservationCommand implements Command {
 
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "showId", showId);
-        validateTickets(errors);
+        validateTickets(errors, tickets);
         validateSeats(errors);
         validateSeatsNumbers(errors, seats);
         validateSeatsRows(errors, seats);
@@ -64,15 +64,20 @@ public class CreateReservationCommand implements Command {
         }
     }
 
-    public void validateTickets(ValidationErrors errors) {
-        if (tickets == null || tickets.isEmpty()) {
-            errors.add("ticket", "You must add at least one ticket");
+    private void validateTickets(ValidationErrors errors, Set<Ticket> tickets) {
+        for(Ticket ticket : tickets) {
+            if (ticket.getCount() <= 0) {
+                errors.add("ticket", "You must add at least one ticket");
+            }
+            if (ticket.getKind() == null) {
+                errors.add("Ticket kind", "You must select ticket type");
+            }
         }
     }
 
-    public void validateSeats(ValidationErrors errors) {
+    private void validateSeats(ValidationErrors errors) {
         if (seats == null || seats.isEmpty()) {
-            errors.add("Seats", "You must choose seats");
+            errors.add("seats", "You must choose seats");
             throw new CommandInvalidException(errors);
         }
     }
