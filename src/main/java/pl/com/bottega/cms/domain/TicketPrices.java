@@ -10,7 +10,7 @@ import java.util.Map;
 @Embeddable
 public class TicketPrices {
 
-    public static final BigDecimal TICKET_DOES_NOT_EXIST = BigDecimal.valueOf(-1);
+    public static final BigDecimal TICKET_KIND_NOT_EXIST = BigDecimal.valueOf(-1);
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, BigDecimal> prices = new HashMap<>();
@@ -34,12 +34,18 @@ public class TicketPrices {
         this.prices = prices;
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     public Receipt calculatePrice(CalculatePricesCommand command) {
         Receipt receipt = new Receipt();
         for (Ticket ticket : command.getTickets()) {
-            if (getTicketPrice(ticket.getKind()).equals(TICKET_DOES_NOT_EXIST))
-                continue;
-            else {
+            if (!getTicketPrice(ticket.getKind()).equals(TICKET_KIND_NOT_EXIST)){
                 receipt.addReceiptLine(ticket.getKind(), ticket.getCount(), getTicketPrice(ticket.getKind()));
             }
         }
@@ -50,7 +56,7 @@ public class TicketPrices {
     private BigDecimal getTicketPrice(String kind) {
         if (prices.containsKey(kind))
             return prices.get(kind);
-        return TICKET_DOES_NOT_EXIST;
+        return TICKET_KIND_NOT_EXIST;
     }
 
 

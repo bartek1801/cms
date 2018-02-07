@@ -28,7 +28,7 @@ public class Receipt {
 
     public void addReceiptLine(String kind, int count, BigDecimal ticketPrice) {
         ReceiptLine receiptLine = new ReceiptLine(kind, count, ticketPrice);
-        this.tickets.add(receiptLine);
+        tickets.add(receiptLine);
     }
 
     public BigDecimal getTotalPrice() {
@@ -62,7 +62,7 @@ public class Receipt {
             this.kind = kind;
             this.count = count;
             this.unitPrice = unitPrice;
-            this.totalPrice = unitPrice.multiply(BigDecimal.valueOf(count));
+            totalPrice = unitPrice.multiply(BigDecimal.valueOf(count));
         }
 
         public String getKind() {
