@@ -49,14 +49,4 @@ public class TicketPricesTest {
         assertEquals(prices2, movie.getTicketPricess().getPrices());
     }
 
-    @Test
-    public void shouldRegularPricesIsRequired(){
-        HashMap<String, BigDecimal> prices = new HashMap<>();
-        prices.put("regular", null);
-        prices.put("student", BigDecimal.valueOf(10));
-        prices.put("school", BigDecimal.valueOf(10));
-        prices.put("children", BigDecimal.valueOf(5));
-        SetTicketPricesCommand cmd = new SetTicketPricesCommand();
-
-    }
 }

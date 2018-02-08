@@ -27,8 +27,6 @@ public class SetTicketPricesCommand implements Command {
     }
 
     public void validate(ValidationErrors errors) {
-        validatePresence(errors, "movieId", movieId);
-        validatePresence(errors, "prices", prices);
         validateObligatoryFields(prices, errors, "student");
         validateObligatoryFields(prices, errors, "regular");
         validateObligatoryValues(prices, errors);
