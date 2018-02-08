@@ -5,7 +5,10 @@ import pl.com.bottega.cms.domain.Customer;
 import pl.com.bottega.cms.domain.Seat;
 import pl.com.bottega.cms.domain.Ticket;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class CreateReservationCommand implements Command {
@@ -51,6 +54,7 @@ public class CreateReservationCommand implements Command {
     public void validate(ValidationErrors errors) {
         validatePresence(errors, "showId", showId);
         validateTickets(errors, tickets);
+        validateUniqueTicketKinds(errors, tickets);
         validateSeats(errors);
         validateSeatsNumbers(errors, seats);
         validateSeatsRows(errors, seats);
@@ -73,6 +77,13 @@ public class CreateReservationCommand implements Command {
                 errors.add("Ticket kind", "You must select ticket type");
             }
         }
+    }
+
+    private void validateUniqueTicketKinds(ValidationErrors errors, Set<Ticket> tickets) {
+        List<String> ticketKinds = tickets.stream().map(Ticket::getKind).collect(Collectors.toList());
+        boolean isTicketKindsAreUnique = new HashSet<String>(ticketKinds).size() != ticketKinds.size();
+        if (isTicketKindsAreUnique)
+            errors.add("tickets", "ticket kinds must be unique, they can't be repeated");
     }
 
     private void validateSeats(ValidationErrors errors) {
