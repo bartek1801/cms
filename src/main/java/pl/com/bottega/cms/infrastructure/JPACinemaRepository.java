@@ -15,12 +15,6 @@ import java.util.Optional;
 public class JPACinemaRepository extends GenericJPARepository<Cinema> implements CinemaRepository {
 
 
-
-    @Override
-    public void save(Cinema cinema) {
-        entityManager.persist(cinema);
-    }
-
     @Override
     public boolean isCinemaExist(String name, String city) {
         return get(name, city).isPresent();
@@ -39,13 +33,7 @@ public class JPACinemaRepository extends GenericJPARepository<Cinema> implements
         }
     }
 
-    @Override
-    public Cinema get(Long cinemaId) {
-        Cinema cinema = entityManager.find(Cinema.class, cinemaId);
-        if (cinema == null)
-            throw new NoSuchEntityException();
-        return cinema;
-    }
+
 
 
 }
