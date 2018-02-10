@@ -2,6 +2,7 @@ package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.Reservation;
+import pl.com.bottega.cms.domain.repositories.GenericJPARepository;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class JPAReservationRepository implements ReservationRepository{
+public class JPAReservationRepository extends GenericJPARepository<Reservation> implements ReservationRepository{
 
     private EntityManager entityManager;
 
