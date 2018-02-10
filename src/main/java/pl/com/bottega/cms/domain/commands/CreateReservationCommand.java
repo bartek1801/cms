@@ -55,6 +55,7 @@ public class CreateReservationCommand implements Command {
         validatePresence(errors, "showId", showId);
         validateTickets(errors, tickets);
         validateUniqueTicketKinds(errors, tickets);
+        validateTicketCountAndSeatsCount(errors, tickets, seats);
         validateSeats(errors);
         validateSeatsNumbers(errors, seats);
         validateSeatsRows(errors, seats);
@@ -68,9 +69,16 @@ public class CreateReservationCommand implements Command {
         }
     }
 
+    private void validateTicketCountAndSeatsCount(ValidationErrors errors, Set<Ticket> tickets, Set<Seat> seats) {
+        Integer ticketCount = tickets.stream().collect(Collectors.summingInt(Ticket::getCount));
+        Integer seatsCount = seats.size();
+        if (ticketCount != seatsCount)
+            errors.add("Tickets or Seats ", "Count of tickets must be equal to count of seats");
+    }
+
     private void validateTickets(ValidationErrors errors, Set<Ticket> tickets) {
         for(Ticket ticket : tickets) {
-            if (ticket.getCount() <= 0) {
+            if (ticket.getCount() == null || ticket.getCount() <= 0) {
                 errors.add("ticket", "You must add at least one ticket");
             }
             if (ticket.getKind() == null) {
@@ -120,4 +128,6 @@ public class CreateReservationCommand implements Command {
             errors.add(email, "Invalid mail format");
         }
     }
+
+
 }
