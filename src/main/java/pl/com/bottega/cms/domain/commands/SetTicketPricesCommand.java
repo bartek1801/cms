@@ -30,6 +30,7 @@ public class SetTicketPricesCommand implements Command {
     public void validate(ValidationErrors errors) {
         validateObligatoryFields(prices, errors, "student");
         validateObligatoryFields(prices, errors, "regular");
+        validateObligatoryFields(prices, errors);
         validateNegativeValues(prices, errors);
 
     }
@@ -44,6 +45,14 @@ public class SetTicketPricesCommand implements Command {
     public void validateObligatoryFields(Map<String, BigDecimal> prices, ValidationErrors errors, String fieldName) {
         if (prices.keySet().stream().filter(key -> key.toLowerCase().equals(fieldName)).collect(Collectors.toList()).isEmpty()) {
             errors.add(fieldName, "Field with name '" + fieldName + "' is required.");
+        }
+    }
+
+    public void validateObligatoryFields(Map<String, BigDecimal> prices, ValidationErrors errors) {
+        for(String kind : prices.keySet()) {
+            if(kind.trim().length() == 0) {
+                errors.add("ticketPricesKind", "Field can't be empty");
+            }
         }
     }
 

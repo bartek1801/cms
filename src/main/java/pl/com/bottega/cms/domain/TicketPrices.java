@@ -1,6 +1,8 @@
 package pl.com.bottega.cms.domain;
 
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
+import pl.com.bottega.cms.domain.commands.CommandInvalidException;
+import pl.com.bottega.cms.domain.commands.ValidationErrors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

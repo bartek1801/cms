@@ -14,7 +14,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(String kind, int count) {
+    public Ticket(String kind, Integer count) {
         this.kind = kind;
         this.count = count;
     }

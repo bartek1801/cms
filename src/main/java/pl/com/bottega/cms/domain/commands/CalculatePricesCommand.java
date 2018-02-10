@@ -31,6 +31,7 @@ public class CalculatePricesCommand implements Command {
     }
 
     public void validate(ValidationErrors errors) {
+
         validatePresence(errors, "showId", showId);
         validatePresence(errors, "tickets", tickets);
         validateNumber(errors, showId);
@@ -38,6 +39,7 @@ public class CalculatePricesCommand implements Command {
         validateTicket(errors, tickets);
         validateTicketKindsUniqueness(errors,tickets);
         validateTicketFields(errors, tickets);
+        validateCount(errors, tickets);
     }
 
     private void validateTicket(ValidationErrors errors, Set<Ticket> tickets) {
@@ -49,13 +51,12 @@ public class CalculatePricesCommand implements Command {
     private void validateTicketFields(ValidationErrors errors, Set<Ticket> tickets) {
         if ( !(tickets == null)) {
             for (Ticket ticket : tickets) {
-                if (ticket.getKind().isEmpty() || ticket.getKind() == null)
-                    errors.add("ticketKind", "ticket kind is requiered");
                 if (ticket.getCount() == null)
                     errors.add("ticketCount", "ticket count is requiered");
+                if (ticket.getKind() == null ||ticket.getKind().isEmpty())
+                    errors.add("ticketKind", "ticket kind is requiered");
             }
         }
-
     }
 
     private void validateTicketKindsUniqueness(ValidationErrors errors, Set<Ticket> tickets) {
@@ -67,11 +68,20 @@ public class CalculatePricesCommand implements Command {
         }
     }
 
-
     private void validateNumber(ValidationErrors errors, Long showId) {
         if (!(showId == null)) {
             if (showId <= 0)
                 errors.add("showId", "ShowId must be number greater than zero");
         }
+    }
+
+    private void validateCount(ValidationErrors errors, Set<Ticket> tickets) {
+        if (!(tickets == null)) {
+           for(Ticket ticket: tickets) {
+               if(ticket.getCount() != null)
+              if(ticket.getCount() < 0)
+                  errors.add("Count", "Count must be greater than zero");
+        }
+    }
     }
 }
