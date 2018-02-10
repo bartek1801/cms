@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
-public class TicketPricesTest {
+public class SetTicketPricesTest {
 
     private final Movie movie = new Movie();
 

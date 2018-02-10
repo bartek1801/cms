@@ -19,11 +19,14 @@ public class SetTicketPricesHandler implements Handler<SetTicketPricesCommand, V
 
     @Transactional
     public Void handle(SetTicketPricesCommand cmd) {
+        //freeTicketPrice(cmd);
         Movie movie = movieRepository.get(cmd.getMovieId());
         movie.setPrices(cmd);
         movieRepository.save(movie);
         return null;
     }
+
+
 
     @Override
     public Class<? extends Command> getSupportedCommandClass() {

@@ -2,6 +2,7 @@ package pl.com.bottega.cms.domain.commands;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class SetTicketPricesCommand implements Command {
@@ -29,7 +30,6 @@ public class SetTicketPricesCommand implements Command {
     public void validate(ValidationErrors errors) {
         validateObligatoryFields(prices, errors, "student");
         validateObligatoryFields(prices, errors, "regular");
-        validateObligatoryValues(prices, errors);
         validateNegativeValues(prices, errors);
 
     }
@@ -41,16 +41,10 @@ public class SetTicketPricesCommand implements Command {
         }
     }
 
-    private void validateObligatoryValues(Map<String, BigDecimal> prices, ValidationErrors errors) {
-            if (prices.values().equals(null) || prices.values().isEmpty())
-                errors.add("ticketRequiredPrices", "ticket prices are required");
-        }
-
     public void validateObligatoryFields(Map<String, BigDecimal> prices, ValidationErrors errors, String fieldName) {
         if (prices.keySet().stream().filter(key -> key.toLowerCase().equals(fieldName)).collect(Collectors.toList()).isEmpty()) {
             errors.add(fieldName, "Field with name '" + fieldName + "' is required.");
         }
     }
-
 
 }
