@@ -10,8 +10,13 @@ public class Seat {
 
     private Integer seat;
 
-
     public Seat() {
+
+    }
+
+    public Seat(Integer row, Integer seat) {
+        this.row = row;
+        this.seat = seat;
     }
 
     public Seat(Integer row, Integer seat) {
