@@ -18,7 +18,6 @@ public abstract  class GenericJPARepository<T> implements Repository<T> {
         this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-
     @Override
     public void save(T t) {
         entityManager.persist(t);
