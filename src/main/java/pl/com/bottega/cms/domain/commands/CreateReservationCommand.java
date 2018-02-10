@@ -60,6 +60,7 @@ public class CreateReservationCommand implements Command {
         validateSeatsNumbers(errors, seats);
         validateSeatsRows(errors, seats);
         validatePresence(errors, "customer", customer);
+        validateTicketCount(errors, tickets);
         if (customer != null) {
             validatePresence(errors, "firstName", customer.getFirstName());
             validatePresence(errors, "lastName", customer.getLastName());
@@ -70,26 +71,36 @@ public class CreateReservationCommand implements Command {
     }
 
     private void validateTicketCount(ValidationErrors errors, Set<Ticket> tickets) {
+       if(ticketCountIsNull())
+                errors.add("Tickets: count", "Ticket count can'be blank");
+    }
+
+    private boolean ticketCountIsNull(){
         for (Ticket ticket : tickets){
             if (ticket.getCount() == null)
-                errors.add("Tickets: count", "Ticket count can'be blank");
+                return true;
         }
+        return false;
     }
 
     private void validateTicketCountAndSeatsCount(ValidationErrors errors, Set<Ticket> tickets, Set<Seat> seats) {
-        Integer ticketCount = tickets.stream().mapToInt(Ticket::getCount).sum();
-        Integer seatsCount = seats.size();
-        if (ticketCount != seatsCount)
-            errors.add("Tickets or Seats ", "Count of tickets must be equal to count of seats");
+        if (!ticketCountIsNull()) {
+            Integer ticketCount = tickets.stream().mapToInt(Ticket::getCount).sum();
+            Integer seatsCount = seats.size();
+            if (ticketCount != seatsCount)
+                errors.add("Tickets or Seats ", "Count of tickets must be equal to count of seats");
+        }
     }
 
     private void validateTickets(ValidationErrors errors, Set<Ticket> tickets) {
-        for(Ticket ticket : tickets) {
-            if (ticket.getCount() == null || ticket.getCount() <= 0) {
-                errors.add("Ticket", "You must add at least one ticket");
-            }
-            if (ticket.getKind() == null) {
-                errors.add("Ticket kind", "You must select ticket type");
+        if (!ticketCountIsNull()) {
+            for (Ticket ticket : tickets) {
+                if (ticket.getCount() == null || ticket.getCount() <= 0) {
+                    errors.add("Ticket", "You must add at least one ticket");
+                }
+                if (ticket.getKind() == null) {
+                    errors.add("Ticket kind", "You must select ticket type");
+                }
             }
         }
     }
