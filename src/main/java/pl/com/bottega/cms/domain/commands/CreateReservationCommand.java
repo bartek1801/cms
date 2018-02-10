@@ -78,8 +78,8 @@ public class CreateReservationCommand implements Command {
 
     private void validateTickets(ValidationErrors errors, Set<Ticket> tickets) {
         for(Ticket ticket : tickets) {
-            if (ticket.getCount() == null || ticket.getCount() <= 0) {
-                errors.add("ticket", "You must add at least one ticket");
+            if (ticket.getCount() <= 0) {
+                errors.add("Ticket", "You must add at least one ticket");
             }
             if (ticket.getKind() == null) {
                 errors.add("Ticket kind", "You must select ticket type");

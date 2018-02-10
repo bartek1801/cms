@@ -8,7 +8,7 @@ public class Ticket {
 
     private String kind;
 
-    private Integer count;
+    private int count;
 
 
     public Ticket() {
@@ -22,11 +22,11 @@ public class Ticket {
         this.kind = kind;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
