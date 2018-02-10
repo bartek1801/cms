@@ -83,7 +83,7 @@ public class CreateReservationCommand implements Command {
         List<String> ticketKinds = tickets.stream().map(Ticket::getKind).collect(Collectors.toList());
         boolean isTicketKindsAreUnique = new HashSet<String>(ticketKinds).size() != ticketKinds.size();
         if (isTicketKindsAreUnique)
-            errors.add("tickets", "ticket kinds must be unique, they can't be repeated");
+            errors.add("Tickets", "Ticket kinds must be unique, they can't be repeated");
     }
 
     private void validateSeats(ValidationErrors errors) {
@@ -95,23 +95,29 @@ public class CreateReservationCommand implements Command {
 
     private void validateSeatsRows(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getRow() <= 0 || seat.getRow() > 10) {
-                errors.add("seats", "row must be between 1 and 10");
+            if (seat.getRow() == null){
+                errors.add("Seats: rows", "Can't be blank");
+            }
+             else if (seat.getRow() <= 0 || seat.getRow() > 10 ) {
+                errors.add("Seats: rows", "row must be between 1 and 10");
             }
         }
     }
 
     private void validateSeatsNumbers(ValidationErrors errors, Set<Seat> seats) {
         for (Seat seat : seats) {
-            if (seat.getSeat() <= 0 || seat.getSeat() > 15) {
-                errors.add("seats", "seat must be between 1 and 15");
+            if (seat.getSeat() == null) {
+                errors.add("Seats", "Can't be blank");
+            }
+            else if (seat.getSeat() <= 0 || seat.getSeat() > 15) {
+                errors.add("Seats", "Seat must be between 1 and 15");
             }
         }
     }
 
     private void validateWithPattern(ValidationErrors errors, String email, String customerEmail, String emailFormat) {
         if (customerEmail != null && !customerEmail.matches(emailFormat)) {
-            errors.add(email, "invalid mail format");
+            errors.add(email, "Invalid mail format");
         }
     }
 }
