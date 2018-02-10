@@ -14,6 +14,11 @@ public class Ticket {
     public Ticket() {
     }
 
+    public Ticket(String kind, int count) {
+        this.kind = kind;
+        this.count = count;
+    }
+
     public String getKind() {
         return kind;
     }

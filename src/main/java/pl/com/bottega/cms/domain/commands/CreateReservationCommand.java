@@ -69,8 +69,15 @@ public class CreateReservationCommand implements Command {
         }
     }
 
+    private void validateTicketCount(ValidationErrors errors, Set<Ticket> tickets) {
+        for (Ticket ticket : tickets){
+            if (ticket.getCount() == null)
+                errors.add("Tickets: count", "Ticket count can'be blank");
+        }
+    }
+
     private void validateTicketCountAndSeatsCount(ValidationErrors errors, Set<Ticket> tickets, Set<Seat> seats) {
-        Integer ticketCount = tickets.stream().collect(Collectors.summingInt(Ticket::getCount));
+        Integer ticketCount = tickets.stream().mapToInt(Ticket::getCount).sum();
         Integer seatsCount = seats.size();
         if (ticketCount != seatsCount)
             errors.add("Tickets or Seats ", "Count of tickets must be equal to count of seats");
@@ -78,7 +85,7 @@ public class CreateReservationCommand implements Command {
 
     private void validateTickets(ValidationErrors errors, Set<Ticket> tickets) {
         for(Ticket ticket : tickets) {
-            if (ticket.getCount() <= 0) {
+            if (ticket.getCount() == null || ticket.getCount() <= 0) {
                 errors.add("Ticket", "You must add at least one ticket");
             }
             if (ticket.getKind() == null) {

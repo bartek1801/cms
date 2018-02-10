@@ -14,6 +14,12 @@ public class Seat {
     public Seat() {
     }
 
+    public Seat(Integer row, Integer seat) {
+        this.row = row;
+        this.seat = seat;
+    }
+
+
     public Integer getRow() {
         return row;
     }
