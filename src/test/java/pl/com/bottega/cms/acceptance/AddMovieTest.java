@@ -41,9 +41,9 @@ public class AddMovieTest extends AcceptanceTest {
     @Test
     public void shouldAddMovie() {
         //when
-       createMovieHandler.handle(cmd);
+        createMovieHandler.handle(cmd);
 
-       //then
+        //then
         MovieDto movieDto = movieFinder.get(1L);
         assertEquals(cmd.getActors(), movieDto.getActors());
         assertEquals(cmd.getGenres(), movieDto.getGenres());

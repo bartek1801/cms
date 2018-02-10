@@ -84,8 +84,8 @@ public class ShowTest extends AcceptanceTest {
                 cmd.setCinemaId(1L);
                 cmd.setMovieId(1L);
                 cmd.setDates(new HashSet<>(Arrays.asList(LocalDateTime.parse("2018-01-27T00:00"),
-                                                        LocalDateTime.parse("2018-01-27T12:30"),
-                                                        LocalDateTime.parse("2018-01-27T23:59"))));
+                        LocalDateTime.parse("2018-01-27T12:30"),
+                        LocalDateTime.parse("2018-01-27T23:59"))));
                 return cmd;
             }
             case "calendar": {

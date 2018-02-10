@@ -7,11 +7,9 @@ import pl.com.bottega.cms.domain.Show;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface ShowRepository {
+public interface ShowRepository extends Repository<Show>{
 
-    void save(Show show);
 
     List find(LocalDateTime date, Cinema cinema, Movie movie);
 
-    Show get(Long showNo);
 }

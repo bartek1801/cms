@@ -5,19 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.com.bottega.cms.application.CinemaDto;
 import pl.com.bottega.cms.domain.Cinema;
 import pl.com.bottega.cms.domain.repositories.CinemaRepository;
+import pl.com.bottega.cms.domain.repositories.GenericJPARepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.Optional;
 
 @Component
-public class JPACinemaRepository implements CinemaRepository {
+public class JPACinemaRepository extends GenericJPARepository<Cinema> implements CinemaRepository {
 
-    private EntityManager entityManager;
-
-    public JPACinemaRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
 
     @Override
