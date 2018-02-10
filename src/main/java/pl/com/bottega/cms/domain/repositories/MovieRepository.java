@@ -5,9 +5,7 @@ import pl.com.bottega.cms.domain.Movie;
 /**
  * Created by user on 17.12.2017.
  */
-public interface MovieRepository {
+public interface MovieRepository extends  Repository<Movie> {
 
-    void save(Movie movie);
 
-    Movie get(Long movieId);
 }
