@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.Cinema;
 import pl.com.bottega.cms.domain.Movie;
 import pl.com.bottega.cms.domain.Show;
+import pl.com.bottega.cms.domain.repositories.GenericJPARepository;
 import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import javax.persistence.EntityManager;
@@ -11,18 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class JPAShowRepository implements ShowRepository{
-
-    private EntityManager entityManager;
-
-    public JPAShowRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    @Override
-    public void save(Show show) {
-        entityManager.persist(show);
-    }
+public class JPAShowRepository extends GenericJPARepository<Show> implements ShowRepository{
 
     @Override
     public List<Show> find(LocalDateTime date, Cinema cinema, Movie movie) {
@@ -31,14 +21,6 @@ public class JPAShowRepository implements ShowRepository{
                 .setParameter("cinema", cinema)
                 .setParameter("movie", movie)
                 .getResultList();
-    }
-
-    @Override
-    public Show get(Long showNo) {
-        Show show = entityManager.find(Show.class, showNo);
-        if (show == null)
-            throw new NoSuchEntityException();
-        return show;
     }
 }
 
