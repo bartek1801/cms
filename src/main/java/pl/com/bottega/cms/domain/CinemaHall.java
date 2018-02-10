@@ -26,6 +26,10 @@ public class CinemaHall {
         }
     }
 
+    public CinemaHall(boolean[][] seats) {
+        this.seats = seats;
+    }
+
     public void checkReservation(CreateReservationCommand command) {
         ValidationErrors errors = new ValidationErrors();
 
