@@ -24,15 +24,15 @@ public class MovieDto {
 
     private Integer length;
 
-    private List<TicketDto.ShowDto> shows ;
+    private List<ShowDto> shows ;
 
-    public List<TicketDto.ShowDto> getShows() {
+    public List<ShowDto> getShows() {
         return shows;
     }
 
     public TicketPrices ticketPrices;
 
-    public void setShows(List<TicketDto.ShowDto> shows) {
+    public void setShows(List<ShowDto> shows) {
         this.shows = shows;
     }
 
@@ -109,8 +109,8 @@ public class MovieDto {
         this.minAge = movie.getMinAge();
         this.length = movie.getLength();
         this.shows = movie.getShows().stream()
-                .map(TicketDto.ShowDto::new)
-                .sorted(Comparator.comparing(TicketDto.ShowDto::getTime))
+                .map(ShowDto::new)
+                .sorted(Comparator.comparing(ShowDto::getTime))
                 .collect(Collectors.toList());
         this.ticketPrices = movie.getTicketPricess();
     }
