@@ -30,6 +30,7 @@ public class CinemaHall {
         this.seats = seats;
     }
 
+
     public void checkReservation(CreateReservationCommand command) {
         ValidationErrors errors = new ValidationErrors();
 
