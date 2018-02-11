@@ -48,8 +48,6 @@ public class CinemaHall {
         if (!allRowsEqual) {
             checkAbilityToReserveSeatsToAnotherPlace(errors, seats);
         }
-
-
     }
 
     private void seatAreNextToEachOther(ValidationErrors errors, Set<Seat> seats) {
@@ -94,5 +92,7 @@ public class CinemaHall {
 
     }
 
-
+    public boolean[][] getSeats() {
+        return seats;
+    }
 }
