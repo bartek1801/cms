@@ -1,9 +1,11 @@
 package pl.com.bottega.cms.domain;
 
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
+import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "shows")
@@ -68,7 +70,7 @@ public class Show {
         this.date = date;
     }
 
-    public Receipt calculatePrice(CalculatePricesCommand command) {
-        return movie.calculatePrice(command); //TODO
+    public Receipt calculatePrice(Set<Ticket> tickets) {
+        return movie.calculatePrice(tickets);
     }
 }

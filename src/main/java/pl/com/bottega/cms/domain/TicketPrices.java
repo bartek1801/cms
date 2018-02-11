@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Embeddable
 public class TicketPrices {
@@ -44,9 +45,9 @@ public class TicketPrices {
         this.movie = movie;
     }
 
-    public Receipt calculatePrice(CalculatePricesCommand command) {
+    public Receipt calculatePrice(Set<Ticket> tickets) {
         Receipt receipt = new Receipt();
-        for (Ticket ticket : command.getTickets()) {
+        for (Ticket ticket : tickets) {
             if (!getTicketPrice(ticket.getKind()).equals(TICKET_KIND_NOT_EXIST)){
                 receipt.addReceiptLine(ticket.getKind(), ticket.getCount(), getTicketPrice(ticket.getKind()));
             }

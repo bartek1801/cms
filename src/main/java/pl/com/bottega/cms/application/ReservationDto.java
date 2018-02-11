@@ -1,5 +1,6 @@
 package pl.com.bottega.cms.application;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import pl.com.bottega.cms.domain.*;
 import pl.com.bottega.cms.domain.repositories.Repository;
 
@@ -107,6 +108,7 @@ public class ReservationDto {
 
         private Long id;
 
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
         private LocalDateTime time;
 
         public ReservedShowDto(Show show) {

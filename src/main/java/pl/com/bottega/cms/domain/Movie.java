@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.springframework.data.repository.cdi.Eager;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
+import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 
 import javax.persistence.*;
@@ -98,7 +99,8 @@ public class Movie {
         }
     }
 
-    public Receipt calculatePrice(CalculatePricesCommand command) {
-        return ticketPrices.calculatePrice(command);
+    public Receipt calculatePrice(Set<Ticket> tickets) {
+        return ticketPrices.calculatePrice(tickets);
     }
+
 }

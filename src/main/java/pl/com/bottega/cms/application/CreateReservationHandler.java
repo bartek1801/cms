@@ -2,13 +2,16 @@ package pl.com.bottega.cms.application;
 
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.CinemaHall;
+import pl.com.bottega.cms.domain.Receipt;
 import pl.com.bottega.cms.domain.Reservation;
+import pl.com.bottega.cms.domain.Show;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Component
@@ -27,10 +30,12 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     @Override
     @Transactional
     public ReservationNumberDto handle(CreateReservationCommand command) {
-        Reservation reservation = new Reservation(command);
         //sprawdzić czy istnieja dane rodzaje biletów dla tego show
         //Show show = showRepository ;
         //TODO
+        Show show = showRepository.get(command.getShowId());
+        Receipt receipt = show.calculatePrice(command.getTickets());
+        Reservation reservation = new Reservation(command, receipt.getTotalPrice());
 
         Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);

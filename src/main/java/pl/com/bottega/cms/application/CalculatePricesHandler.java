@@ -26,7 +26,7 @@ public class CalculatePricesHandler implements Handler<CalculatePricesCommand, R
     @Transactional
     public Receipt handle(CalculatePricesCommand command) {
         Show show = showRepository.get(command.getShowId());
-        Receipt receipt = show.calculatePrice(command);
+        Receipt receipt = show.calculatePrice(command.getTickets());
         return receipt;
     }
 

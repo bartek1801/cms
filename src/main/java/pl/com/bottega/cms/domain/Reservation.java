@@ -25,24 +25,27 @@ public class Reservation {
     @ElementCollection
     private Set<Seat> seats;
 
+    @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 
-    private BigDecimal totalCost; //TODO przeliczyć cene stworzyć metodę
+    private BigDecimal totalCost;
 
     public Reservation() {
     }
 
-    public Reservation(CreateReservationCommand cmd) {
+    public Reservation(CreateReservationCommand cmd, BigDecimal totalCost) {
         this.showId = cmd.getShowId();
         this.customer = cmd.getCustomer();
         this.tickets = cmd.getTickets();
         this.seats = cmd.getSeats();
         this.reservationStatus = ReservationStatus.PENDING;
+        this.totalCost = totalCost;
     }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

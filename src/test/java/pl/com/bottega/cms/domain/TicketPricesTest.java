@@ -35,7 +35,7 @@ public class TicketPricesTest {
         command.setTickets(tickets);
         prices.setPrices(createMap());
 
-        assertEquals(BigDecimal.valueOf(50), prices.calculatePrice(command).getTotalPrice());
+        assertEquals(BigDecimal.valueOf(50), prices.calculatePrice(command.getTickets()).getTotalPrice());
     }
 
     @Test
