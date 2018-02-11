@@ -9,7 +9,7 @@ import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping
 public class ReservationController {
 
     private CommandGateway gateway;
@@ -21,7 +21,7 @@ public class ReservationController {
         this.reservationFinder = reservationFinder;
     }
 
-    @PutMapping
+    @PutMapping("/reservations")
     public ReservationNumberDto create(@RequestBody CreateReservationCommand cmd){
         ReservationNumberDto reservationNumber = gateway.execute(cmd);
         return reservationNumber;
@@ -34,7 +34,7 @@ public class ReservationController {
         return receipt;
     }
 
-    @GetMapping
+    @GetMapping("/reservations")
     public List<ReservationDto> search(ReservationQuery query){
         return reservationFinder.search(query);
     }

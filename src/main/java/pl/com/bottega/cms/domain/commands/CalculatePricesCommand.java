@@ -40,6 +40,9 @@ public class CalculatePricesCommand implements Command {
         validateTicketKindsUniqueness(errors,tickets);
         validateTicketFields(errors, tickets);
         validateCount(errors, tickets);
+        validateTicketType(errors, tickets, "school");
+        validateTicketType(errors, tickets, "regular");
+
     }
 
     private void validateTicket(ValidationErrors errors, Set<Ticket> tickets) {
@@ -83,5 +86,13 @@ public class CalculatePricesCommand implements Command {
                   errors.add("Count", "Count must be greater than zero");
         }
     }
+    }
+
+    private void validateTicketType(ValidationErrors errors, Set<Ticket> tickets, String fieldName){
+        if(!(tickets == null)) {
+           if(!(tickets.stream().map(Ticket::getKind).filter(k -> k.equals(fieldName)).findFirst()).isPresent())
+               errors.add("ticketKind", "Invalid ticket type format");
+
+        }
     }
 }
