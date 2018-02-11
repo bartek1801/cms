@@ -3,6 +3,7 @@ package pl.com.bottega.cms.ui.rest;
 import org.springframework.web.bind.annotation.*;
 import pl.com.bottega.cms.application.CommandGateway;
 import pl.com.bottega.cms.application.ReservationNumberDto;
+import pl.com.bottega.cms.application.ReservationQuery;
 import pl.com.bottega.cms.domain.Receipt;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
@@ -28,6 +29,11 @@ public class ReservationController {
     public Receipt calculatePrices(@RequestBody CalculatePricesCommand cmd){
         Receipt receipt = gateway.execute(cmd);
         return receipt;
+    }
+
+    @GetMapping
+    public void search(ReservationQuery query){
+        //TODO
     }
 
 }

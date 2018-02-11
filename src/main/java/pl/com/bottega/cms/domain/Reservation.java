@@ -3,6 +3,7 @@ package pl.com.bottega.cms.domain;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -24,14 +25,19 @@ public class Reservation {
     @ElementCollection
     private Set<Seat> seats;
 
+    private ReservationStatus reservationStatus;
+
+    private BigDecimal totalCost;
+
     public Reservation() {
     }
 
-    public Reservation(CreateReservationCommand cmd) {
+    public Reservation(CreateReservationCommand cmd, ReservationStatus reservationStatus) {
         this.showId = cmd.getShowId();
         this.customer = cmd.getCustomer();
         this.tickets = cmd.getTickets();
         this.seats = cmd.getSeats();
+        this.reservationStatus = ReservationStatus.PENDING;
     }
 
     public Long getId() {
@@ -72,5 +78,21 @@ public class Reservation {
 
     public void setSeats(Set<Seat> seats) {
         this.seats = seats;
+    }
+
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
     }
 }

@@ -6,6 +6,7 @@ import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
+import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import javax.transaction.Transactional;
 import java.util.Set;
@@ -16,14 +17,21 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
 
     private ReservationRepository reservationRepository;
 
-    public CreateReservationHandler(ReservationRepository reservationRepository) {
+    private ShowRepository showRepository;
+
+    public CreateReservationHandler(ReservationRepository reservationRepository, ShowRepository showRepository) {
         this.reservationRepository = reservationRepository;
+        this.showRepository = showRepository;
     }
 
     @Override
     @Transactional
     public ReservationNumberDto handle(CreateReservationCommand command) {
-        Reservation reservation = new Reservation(command);
+        Reservation reservation = new Reservation(command, reservationStatus);
+        //sprawdzić czy istnieja dane rodzaje biletów dla tego show
+        //Show show = showRepository ;
+        //TODO
+
         Set<Reservation> reservations = reservationRepository.getReservations(command.getShowId());
         CinemaHall cinemaHall = new CinemaHall(reservations);
         cinemaHall.checkReservation(command);
