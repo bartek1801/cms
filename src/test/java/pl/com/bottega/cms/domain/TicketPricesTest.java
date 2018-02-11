@@ -105,6 +105,18 @@ public class TicketPricesTest {
         assertEquals(1, errors.getErrors().size());
     }
 
+    @Test
+    public void shouldShowIdCanBeNull(){
+        tickets.add(new Ticket("student", 2));
+        tickets.add(new Ticket("regular", 1));
+        command.setShowId(null);
+        command.setTickets(tickets);
+        command.validate(errors);
+
+        assertEquals(1, errors.getErrors().size());
+    }
+
+    @Test
 
     private HashMap<String, BigDecimal> createMap() {
         HashMap<String, BigDecimal> pricesMap = new HashMap<>();

@@ -16,7 +16,6 @@ public class Receipt {
     public Receipt() {
     }
 
-
     public void calculateTotalPrice() {
         List<BigDecimal> ticketPrices = tickets.stream().map(t -> t.totalPrice).collect(Collectors.toList());
         BigDecimal sum = BigDecimal.ZERO;
