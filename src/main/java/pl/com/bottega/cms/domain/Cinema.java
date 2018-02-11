@@ -16,7 +16,7 @@ public class Cinema {
     private String city;
 
     @OneToMany(mappedBy = "cinema", fetch = FetchType.EAGER)
-    private Collection<Show> shows;
+    private Collection<Show> shvows;
 
     public Cinema() {
     }
