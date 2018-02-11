@@ -13,16 +13,15 @@ public class CinemaHallDto {
 
     public CinemaHallDto(CinemaHall cinemaHall) {
         boolean[][] reservation = cinemaHall.getSeats();
-            for (int r = 0; r < cinemaHall.getROWS(); r++){
-                for (int s = 0; s < cinemaHall.getSEATS(); s ++){
-                    if (reservation[r][s] = true)
-                        this.free.add(new Seat(r, s));
-                    else if (reservation[r][s] = false)
-                        this.occupied.add(new Seat(r,s));
+            for (int r = 1; r < cinemaHall.getROWS(); r++){
+                for (int s = 1; s < cinemaHall.getSEATS(); s ++){
+                    if (reservation[r][s] == true)
+                        occupied.add(new Seat(r+ 1, s +1));
+                    else
+                        free.add(new Seat(r +1,s +1));
                 }
             }
     }
-
 
     public Set<Seat> getFree() {
         return free;

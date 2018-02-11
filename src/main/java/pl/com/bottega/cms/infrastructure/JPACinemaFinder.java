@@ -36,8 +36,8 @@ public class JPACinemaFinder implements CinemaFinder {
         query.setParameter("showId", showId);
         Set<Reservation> result =  new HashSet<>();
         result.addAll(query.getResultList());
-        CinemaHall cinemaHall = new CinemaHall(result);
-        return new CinemaHallDto(cinemaHall);
+        //Set<Reservation> result = new JPAReservationRepository(entityManager).getReservations(showId);
+        return new CinemaHallDto(new CinemaHall(result));
 
     }
 }
