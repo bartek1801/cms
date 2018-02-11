@@ -46,7 +46,7 @@ public class Receipt {
         this.tickets = tickets;
     }
 
-    private class ReceiptLine {
+    public class ReceiptLine {
 
 
         private String kind;

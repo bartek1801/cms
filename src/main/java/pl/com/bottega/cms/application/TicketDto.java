@@ -9,6 +9,8 @@ public class TicketDto {
 
     private Integer count;
 
+
+
     public TicketDto(Ticket ticket) {
         this.kind = ticket.getKind();
         this.count = ticket.getCount();

@@ -7,6 +7,7 @@ import pl.com.bottega.cms.domain.repositories.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class ReservationDto {
 
@@ -17,7 +18,7 @@ public class ReservationDto {
 
     private ReservedMovieDto movie;
 
-    private Set<Ticket> tickets;
+    private Set<Receipt.ReceiptLine> tickets;
 
     private Set<Seat> seats;
 
@@ -33,7 +34,7 @@ public class ReservationDto {
         this.number = reservation.getId();
         this.show = new ReservedShowDto(show);
         this.movie = new ReservedMovieDto(show.getMovie());
-        this.tickets = reservation.getTickets();
+        this.tickets = show.calculatePrice(reservation.getTickets()).getTickets();
         this.seats = reservation.getSeats();
         this.customer = new CustomerDto(reservation.getCustomer());
         this.status = reservation.getReservationStatus() ;
@@ -64,11 +65,11 @@ public class ReservationDto {
         this.movie = movie;
     }
 
-    public Set<Ticket> getTickets() {
+    public Set<Receipt.ReceiptLine> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<Ticket> tickets) {
+    public void setTickets(Set<Receipt.ReceiptLine> tickets) {
         this.tickets = tickets;
     }
 
