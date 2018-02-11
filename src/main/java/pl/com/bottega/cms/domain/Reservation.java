@@ -27,12 +27,12 @@ public class Reservation {
 
     private ReservationStatus reservationStatus;
 
-    private BigDecimal totalCost;
+    private BigDecimal totalCost; //TODO przeliczyć cene stworzyć metodę
 
     public Reservation() {
     }
 
-    public Reservation(CreateReservationCommand cmd, ReservationStatus reservationStatus) {
+    public Reservation(CreateReservationCommand cmd) {
         this.showId = cmd.getShowId();
         this.customer = cmd.getCustomer();
         this.tickets = cmd.getTickets();

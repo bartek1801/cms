@@ -1,12 +1,12 @@
 package pl.com.bottega.cms.ui.rest;
 
 import org.springframework.web.bind.annotation.*;
-import pl.com.bottega.cms.application.CommandGateway;
-import pl.com.bottega.cms.application.ReservationNumberDto;
-import pl.com.bottega.cms.application.ReservationQuery;
+import pl.com.bottega.cms.application.*;
 import pl.com.bottega.cms.domain.Receipt;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
@@ -14,8 +14,11 @@ public class ReservationController {
 
     private CommandGateway gateway;
 
-    public ReservationController(CommandGateway gateway) {
+    private ReservationFinder reservationFinder;
+
+    public ReservationController(CommandGateway gateway, ReservationFinder reservationFinder) {
         this.gateway = gateway;
+        this.reservationFinder = reservationFinder;
     }
 
     @PutMapping
@@ -32,8 +35,8 @@ public class ReservationController {
     }
 
     @GetMapping
-    public void search(ReservationQuery query){
-        //TODO
+    public List<ReservationDto> search(ReservationQuery query){
+        return reservationFinder.search(query);
     }
 
 }

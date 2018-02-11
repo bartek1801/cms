@@ -27,15 +27,12 @@ public class ReservationDto {
     private BigDecimal totalPrice;
 
 
-    private Repository repository;
-    //TODO Czy tak można???????????????????
 
-    public ReservationDto(Reservation reservation, Repository repository) {
-        this.repository = repository;
-        Show show = (Show) repository.get(reservation.getShowId()); //może przekazać w metodzie w Handlerze?????
+    public ReservationDto(Reservation reservation) {
+        //TODO
         this.number = reservation.getId();
-        this.show = new ReservedShowDto(show);
-        this.movie = new ReservedMovieDto(show.getMovie());
+//        this.show = new ReservedShowDto(show);
+//        this.movie = new ReservedMovieDto(show.getMovie());
         this.tickets = reservation.getTickets();
         this.seats = reservation.getSeats();
         this.customer = new CustomerDto(reservation.getCustomer());

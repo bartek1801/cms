@@ -27,7 +27,7 @@ public class CreateReservationHandler implements Handler<CreateReservationComman
     @Override
     @Transactional
     public ReservationNumberDto handle(CreateReservationCommand command) {
-        Reservation reservation = new Reservation(command, reservationStatus);
+        Reservation reservation = new Reservation(command);
         //sprawdzić czy istnieja dane rodzaje biletów dla tego show
         //Show show = showRepository ;
         //TODO

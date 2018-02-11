@@ -1,6 +1,7 @@
 package pl.com.bottega.cms.infrastructure;
 
 import org.springframework.stereotype.Component;
+import pl.com.bottega.cms.application.ReservationQuery;
 import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.repositories.GenericJPARepository;
 import pl.com.bottega.cms.domain.repositories.ReservationRepository;
@@ -8,6 +9,7 @@ import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -31,5 +33,12 @@ public class JPAReservationRepository extends GenericJPARepository<Reservation> 
         Set<Reservation> result =  new HashSet<>();
         result.addAll(query.getResultList());
         return  result;
+    }
+
+    @Override
+    public List<Reservation> findReservations(ReservationQuery query) {
+        //Query query
+
+        return null;
     }
 }
