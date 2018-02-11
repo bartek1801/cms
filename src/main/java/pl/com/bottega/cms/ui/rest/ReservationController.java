@@ -6,6 +6,7 @@ import pl.com.bottega.cms.domain.Receipt;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,11 @@ public class ReservationController {
     @GetMapping
     public List<ReservationDto> search(ReservationQuery query){
         return reservationFinder.search(query);
+    }
+
+    @GetMapping("/{reservationNumber}/tickets")
+    void getTickets(@PathVariable Long reservationNumber, HttpServletResponse response){
+
     }
 
 }
