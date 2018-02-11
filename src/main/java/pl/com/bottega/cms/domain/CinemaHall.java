@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 public class CinemaHall {
 
-    private static final int ROWS = 10;
-    private static final int SEATS = 15;
+    private final int ROWS = 10;
+    private final int SEATS = 15;
 
     private boolean[][] seats = new boolean[ROWS][SEATS];
 
@@ -94,5 +94,13 @@ public class CinemaHall {
 
     public boolean[][] getSeats() {
         return seats;
+    }
+
+    public int getROWS() {
+        return ROWS;
+    }
+
+    public int getSEATS() {
+        return SEATS;
     }
 }

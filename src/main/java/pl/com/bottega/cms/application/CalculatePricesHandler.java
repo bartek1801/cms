@@ -30,6 +30,9 @@ public class CalculatePricesHandler implements Handler<CalculatePricesCommand, R
         return receipt;
     }
 
+
+
+
     @Override
     public Class<? extends Command> getSupportedCommandClass() {
         return CalculatePricesCommand.class;
