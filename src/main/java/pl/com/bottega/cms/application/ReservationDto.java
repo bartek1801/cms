@@ -28,11 +28,10 @@ public class ReservationDto {
 
 
 
-    public ReservationDto(Reservation reservation) {
-        //TODO
+    public ReservationDto(Reservation reservation, Show show) {
         this.number = reservation.getId();
-//        this.show = new ReservedShowDto(show);
-//        this.movie = new ReservedMovieDto(show.getMovie());
+        this.show = new ReservedShowDto(show);
+        this.movie = new ReservedMovieDto(show.getMovie());
         this.tickets = reservation.getTickets();
         this.seats = reservation.getSeats();
         this.customer = new CustomerDto(reservation.getCustomer());

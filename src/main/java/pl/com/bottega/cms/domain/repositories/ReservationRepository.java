@@ -10,5 +10,5 @@ public interface ReservationRepository extends Repository<Reservation> {
 
    Set<Reservation> getReservations(Long showId);
 
-   List<Reservation> findReservations(ReservationQuery query);
+
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ShowRepository extends Repository<Show>{
 
-
     List find(LocalDateTime date, Cinema cinema, Movie movie);
 
 }

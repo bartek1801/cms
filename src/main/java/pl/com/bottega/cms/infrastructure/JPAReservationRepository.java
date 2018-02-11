@@ -35,10 +35,5 @@ public class JPAReservationRepository extends GenericJPARepository<Reservation> 
         return  result;
     }
 
-    @Override
-    public List<Reservation> findReservations(ReservationQuery query) {
-        //Query query
 
-        return null;
-    }
 }

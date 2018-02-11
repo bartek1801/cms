@@ -15,6 +15,8 @@ import java.util.Optional;
 public class JPACinemaRepository extends GenericJPARepository<Cinema> implements CinemaRepository {
 
 
+
+
     @Override
     public boolean isCinemaExist(String name, String city) {
         return get(name, city).isPresent();

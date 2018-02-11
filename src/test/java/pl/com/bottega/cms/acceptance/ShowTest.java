@@ -104,7 +104,6 @@ public class ShowTest extends AcceptanceTest {
         }
     }
 
-
     @Test
     public void shouldGetAllShowsFromADay(){ //TODO (nie numeruje id od  1 ????)
         //given

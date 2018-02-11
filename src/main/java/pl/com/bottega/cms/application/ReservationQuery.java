@@ -13,6 +13,8 @@ public class ReservationQuery {
         this.status = status;
     }
 
+    public ReservationQuery() {}
+
     public String getQuery() {
         return query;
     }
