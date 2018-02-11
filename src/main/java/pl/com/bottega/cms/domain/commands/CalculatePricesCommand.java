@@ -56,7 +56,7 @@ public class CalculatePricesCommand implements Command {
             for (Ticket ticket : tickets) {
                 if (ticket.getCount() == null)
                     errors.add("ticketCount", "ticket count is requiered");
-                if (ticket.getKind() == null ||ticket.getKind().isEmpty())
+                if (ticket.getKind().equals(null) ||ticket.getKind().isEmpty())
                     errors.add("ticketKind", "ticket kind is requiered");
             }
         }
