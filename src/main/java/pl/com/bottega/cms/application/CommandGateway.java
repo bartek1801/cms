@@ -1,11 +1,13 @@
 package pl.com.bottega.cms.application;
 
+import com.itextpdf.text.DocumentException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.CommandInvalidException;
 import pl.com.bottega.cms.domain.commands.ValidationErrors;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class CommandGateway {
         this.applicationContext = applicationContext;
     }
 
-    public <T> T execute(Command command){
+    public <T> T execute(Command command)  {
         validate(command);
         Handler handler = handleFor(command);
         return (T) handler.handle(command); }

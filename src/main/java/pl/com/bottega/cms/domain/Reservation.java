@@ -30,6 +30,9 @@ public class Reservation {
 
     private BigDecimal totalCost;
 
+    @OneToMany
+    private Set<PaymentTransaction> transactions;
+
     public Reservation() {
     }
 
@@ -96,5 +99,13 @@ public class Reservation {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public Set<PaymentTransaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<PaymentTransaction> transactions) {
+        this.transactions = transactions;
     }
 }
