@@ -108,4 +108,16 @@ public class Reservation {
     public void setTransactions(Set<PaymentTransaction> transactions) {
         this.transactions = transactions;
     }
+
+    public void markAsPaid() {
+        this.reservationStatus = ReservationStatus.PAID;
+    }
+
+    public void markAsPaymentFailed() {
+        this.reservationStatus = ReservationStatus.PAYMENT_FAILED;
+    }
+
+    public void addTransaction(PaymentTransaction transaction){
+        this.transactions.add(transaction);
+    }
 }

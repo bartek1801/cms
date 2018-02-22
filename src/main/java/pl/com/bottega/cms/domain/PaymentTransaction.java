@@ -1,11 +1,9 @@
 package pl.com.bottega.cms.domain;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Entity
 public class PaymentTransaction {
@@ -22,9 +20,17 @@ public class PaymentTransaction {
 
     private LocalDateTime dateTime;
 
-    private String transactionalNumber;
+    private String transactionNumber;
 
     public PaymentTransaction() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isSuccess() {
@@ -35,8 +41,6 @@ public class PaymentTransaction {
         this.success = success;
     }
 
-
-
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -45,19 +49,11 @@ public class PaymentTransaction {
         this.dateTime = dateTime;
     }
 
-    public String getTransactionalNumber() {
-        return transactionalNumber;
+    public String getTransactionNumber() {
+        return transactionNumber;
     }
 
-    public void setTransactionalNumber(String transactionalNumber) {
-        this.transactionalNumber = transactionalNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
     }
 }

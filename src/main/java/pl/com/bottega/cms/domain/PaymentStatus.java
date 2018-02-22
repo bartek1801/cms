@@ -2,9 +2,9 @@ package pl.com.bottega.cms.domain;
 
 public class PaymentStatus {
 
-    boolean success;
+    private boolean success;
 
-    String errorMessage;
+    private String message;
 
     public PaymentStatus() {
     }
@@ -17,11 +17,11 @@ public class PaymentStatus {
         this.success = success;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
