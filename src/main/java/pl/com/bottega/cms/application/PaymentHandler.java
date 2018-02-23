@@ -7,18 +7,17 @@ import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.ReservationStatus;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.PaymentCommand;
-import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
 import pl.com.bottega.cms.domain.repositories.PaymentFacade;
 import pl.com.bottega.cms.domain.repositories.Repository;
 
 @Component
 @Transactional
-public class PaymentHandler implements Handler<PaymentCommand, PaymentStatus>{
+public class PaymentHandler implements Handler<PaymentCommand, PaymentStatus> {
 
 
     private PaymentFacade paymentFacade;
 
-    private Repository<Reservation> repository;
+    private Repository repository;
 
     public PaymentHandler(PaymentFacade paymentFacade, Repository<Reservation> repository) {
         this.paymentFacade = paymentFacade;
@@ -28,8 +27,7 @@ public class PaymentHandler implements Handler<PaymentCommand, PaymentStatus>{
 
     @Override
     public PaymentStatus handle(PaymentCommand command) {
-        //TODO zrobić zapisywanie transakcji do bazy!!!
-        Reservation reservation = repository.get(command.getReservationNumber());
+        Reservation reservation = (Reservation) repository.get(command.getReservationNumber());
         PaymentStatus paymentStatus = new PaymentStatus();
         if (!canPaidFor(reservation)) {
             return cancelPayment(paymentStatus, "Reservation id already paid");

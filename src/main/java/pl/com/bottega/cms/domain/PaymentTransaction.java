@@ -1,8 +1,11 @@
 package pl.com.bottega.cms.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,15 +17,19 @@ public class PaymentTransaction {
 
     private boolean success;
 
-   // private PaymentType type;
+    private String type;
 
-    //private PaymentSystemDetails details;
+    private String description;
 
+    private BigDecimal amount;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH-mm")
     private LocalDateTime dateTime;
 
     private String transactionNumber;
 
     public PaymentTransaction() {
+
     }
 
     public Long getId() {
@@ -55,5 +62,29 @@ public class PaymentTransaction {
 
     public void setTransactionNumber(String transactionNumber) {
         this.transactionNumber = transactionNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

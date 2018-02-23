@@ -30,7 +30,7 @@ public class Reservation {
 
     private BigDecimal totalCost;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     private Set<PaymentTransaction> transactions;
 
     public Reservation() {
