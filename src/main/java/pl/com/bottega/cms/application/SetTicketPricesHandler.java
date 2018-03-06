@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.domain.Movie;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.SetTicketPricesCommand;
-import pl.com.bottega.cms.domain.commands.ValidationErrors;
 import pl.com.bottega.cms.domain.repositories.MovieRepository;
 
 @Component

@@ -1,23 +1,81 @@
 package pl.com.bottega.cms.application;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.stereotype.Component;
 import pl.com.bottega.cms.domain.Reservation;
+import pl.com.bottega.cms.domain.Seat;
 import pl.com.bottega.cms.domain.commands.Command;
 import pl.com.bottega.cms.domain.commands.GenerateTicketsCommand;
-import pl.com.bottega.cms.domain.repositories.Repository;
+import pl.com.bottega.cms.domain.repositories.ReservationRepository;
+import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
-public class GenerateTicketsHandler implements Handler<GenerateTicketsCommand, Void> {
+import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 
-    private Repository<Reservation> repository;
+@Component
+public class GenerateTicketsHandler implements Handler<GenerateTicketsCommand, byte[]> {
 
-    public GenerateTicketsHandler(Repository repository) {
-        this.repository = repository;
+    private ReservationRepository reservationRepository;
+    private ShowRepository showRepository;
+
+    public GenerateTicketsHandler(ReservationRepository reservationRepository, ShowRepository showRepository) {
+        this.reservationRepository = reservationRepository;
+        this.showRepository = showRepository;
     }
 
     @Override
-    public Void handle(GenerateTicketsCommand command) { //TODO method should return byte[]
-        Reservation reservation = repository.get(command.getReservationNumber());
+    public byte[] handle(GenerateTicketsCommand command) {
+        Reservation reservation = reservationRepository.get(command.getReservationNumber());
+        String cinemaName = showRepository.get(reservation.getShowId()).getCinema().getName();
+        Collection<Seat> seats  =reservation.getSeats();
+        Document document = new Document();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        try {
+            PdfWriter.getInstance(document, stream);
+            document.open();
+            document.add(new Paragraph(cinemaName.toString() + " tickets"));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
 
-        return null;
+        String title = showRepository.get(reservation.getShowId()).getMovie().getTitle();
+        Integer length = showRepository.get(reservation.getShowId()).getMovie().getLength();
+        LocalDateTime time = showRepository.get(reservation.getShowId()).getDate();
+        for(Seat s: seats){
+            Integer row = s.getRow();
+            Integer seat = s.getSeat();
+            try {
+                document.add(createTable(title, time, length, row, seat));
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+        }
+        document.close();
+
+        return stream.toByteArray();
+    }
+
+
+    private static PdfPTable createTable(String title, LocalDateTime time, Integer length, Integer row, Integer seat){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy  HH:mm");
+        PdfPTable table = new PdfPTable(2);
+        PdfPCell cell = new PdfPCell(new Phrase("Movie title: " + title));
+        cell.setColspan(2);
+        table.addCell(cell);
+        table.addCell("Date and time: " + time.format(formatter));
+        table.addCell("Movie duration: " + length);
+        table.addCell("Row: " + row);
+        table.addCell("Seat: " + seat);
+        table.setSpacingAfter(10f);
+        return table;
     }
 
     @Override

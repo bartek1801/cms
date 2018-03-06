@@ -1,9 +1,11 @@
 package pl.com.bottega.cms.domain;
 
+import pl.com.bottega.cms.application.MovieDto;
 import pl.com.bottega.cms.domain.commands.CreateReservationCommand;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -32,6 +34,7 @@ public class Reservation {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     private Set<PaymentTransaction> transactions;
+
 
     public Reservation() {
     }
@@ -120,4 +123,5 @@ public class Reservation {
     public void addTransaction(PaymentTransaction transaction){
         this.transactions.add(transaction);
     }
+
 }

@@ -3,14 +3,10 @@ package pl.com.bottega.cms.application;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.cms.domain.Receipt;
-import pl.com.bottega.cms.domain.Reservation;
 import pl.com.bottega.cms.domain.Show;
 import pl.com.bottega.cms.domain.commands.CalculatePricesCommand;
 import pl.com.bottega.cms.domain.commands.Command;
-import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 import pl.com.bottega.cms.domain.repositories.ShowRepository;
-
-import java.util.Set;
 
 @Component
 public class CalculatePricesHandler implements Handler<CalculatePricesCommand, Receipt> {

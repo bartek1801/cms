@@ -47,12 +47,19 @@ public class ReservationController {
         return reservationFinder.search(query);
     }
 
-    @GetMapping("/{reservationNumber}/tickets")
-    public void getTickets(@PathVariable Long reservationNumber, HttpServletResponse response) {
+    @GetMapping("reservations/{reservationNumber}/tickets")
+    public void getTickets(@PathVariable Long reservationNumber, HttpServletResponse response) throws IOException {
         GenerateTicketsCommand cmd = new GenerateTicketsCommand();
         cmd.setReservationNumber(reservationNumber);
-//        cmd.setResponse(response);
-        gateway.execute(cmd);
+        byte[] pdfData = gateway.execute(cmd);
+        String fileName = String.format("Reservation_%d.pdf", reservationNumber);
+        response.setContentType("application/pdf");
+        response.addHeader("Content-disposition", "attachment; filename=" + fileName);
+        response.setContentLength(pdfData.length);
+        response.setContentLength(pdfData.length);
+        response.getOutputStream().write(pdfData);
+        response.getOutputStream().flush();
+
     }
 
     @PutMapping("/reservations/{reservationNumber}/payment")

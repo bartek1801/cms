@@ -11,7 +11,6 @@ import pl.com.bottega.cms.domain.repositories.ReservationRepository;
 import pl.com.bottega.cms.domain.repositories.ShowRepository;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.Set;
 
 @Component
